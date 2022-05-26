@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+  <title>UDS诊断入门 - anchor blog</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+
+  <link rel="shortcut icon" href="/img/123.jpg" type="image/png" />
+  <meta name="description" content="UDS（Unified Diagnostic Services，统一的诊断服务）诊断协议是在汽车电子ECU环境下的一种诊断通信协议，一旦零部件出了问题或者出过问题，它们会把故障信息保存在内存里面，维修师傅就可以通过通信总线读取这些故障信息，比如一个ECU经历欠压故障之后，它会将欠压故障代表的DTC（诊断故障码）存储起来，可选择性保存的还有发生故障时的快照信息（比如此时的车速、读到的电压值等）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UDS诊断入门">
+<meta property="og:url" content="https://wen990806.github.io/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="anchor blog">
+<meta property="og:description" content="UDS（Unified Diagnostic Services，统一的诊断服务）诊断协议是在汽车电子ECU环境下的一种诊断通信协议，一旦零部件出了问题或者出过问题，它们会把故障信息保存在内存里面，维修师傅就可以通过通信总线读取这些故障信息，比如一个ECU经历欠压故障之后，它会将欠压故障代表的DTC（诊断故障码）存储起来，可选择性保存的还有发生故障时的快照信息（比如此时的车速、读到的电压值等）。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/%E5%B8%B8%E8%A7%81%E7%9A%84NRC.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%8A%E6%96%AD%E6%9C%8D%E5%8A%A1.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-e08028b3aed27ba0e7a86dcd97e93941_720w.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-be53c3c361e5915fced2effc4dec2572_720w.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-827de78f545e8c9b3d857deebdf12c89_720w.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-c9e1fbe12dcc6b1dfd09fe75d9385f64_720w.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-c1e4c712af7df8c57297419937a39797_720w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-66e655dc290de2e290577bebe73df36a_720w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-8447ef3fa5b76bf58c00c0a86ae78de1_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-901e517039fd104a965345380f3af5f8_720w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-0c2d6e6afbc66cac1fdcd4acaab43006_720w.jpg">
+<meta property="article:published_time" content="2022-01-09T08:42:36.000Z">
+<meta property="article:modified_time" content="2022-05-25T09:53:15.315Z">
+<meta property="article:author" content="weichang wen">
+<meta property="article:tag" content="2022">
+<meta property="article:tag" content="UDS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wen990806.github.io/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/%E5%B8%B8%E8%A7%81%E7%9A%84NRC.png">
+  <link rel="stylesheet" href="https://unpkg.com/highlight.js@9.15.8/styles/atom-one-dark.css" crossorigin>
+  <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
+  
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1653562722945">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(/images/background/duola.jpg)"></div>
+    <div class="nexmoe-small" style="background-image: url(/images/background/chibao.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="weichang wen" class="mdui-btn mdui-btn-icon"><img src="/img/123.jpg" alt="weichang wen"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="weichang wen">
+            <img src="/img/123.jpg" alt="weichang wen" alt="weichang wen">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div class="nexmoe-count-item"><span>Articles</span>18 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>Tags</span>7<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Categories</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+<!-- 站内搜索 -->
+
+<div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search" >
+        <form id="search-form">
+            <label><input type="text" id="local-search-input" name="q" results="0" placeholder="站内搜索" class="input form-control" autocomplete="off" autocorrect="off"/></label>
+            <!-- 清空/重置搜索框 -->
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+        </form>
+    </div>
+    <div id="local-search-result"></div> <!-- 搜索结果区 -->
+    <!-- <p class='no-result'></p> 无匹配时显示，注意在 CSS 中设置默认隐藏 -->
+</div>
+
+
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://www.bilibili.com/" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CAN开发/">CAN开发</a>
+          <span class="category-list-count">10</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活足迹/">生活足迹</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/面试/">面试</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 14px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16px;">can</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 12px;">通信原理</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 weichang wen
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/tangyuxian/hexo-theme-tangyuxian" target="_blank">Tangyuxian</a><br/>
+        <a href="http://beian.miit.gov.cn" target="_blank"></a><br/>
+        
+        <div style="font-size: 12px">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量  <a id="busuanzi_value_site_pv"></a> 次<br />
+            本站访客数<a id="busuanzi_value_site_uv"></a>人次
+        </div>
+        
+        
+    </div>
+
+</div><!-- .nexmoe-drawer -->
+
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: NaN%;">
+            <img data-src="/2022/01/09/UDS诊断入门/UDS.png" data-sizes="auto" alt="UDS诊断入门" class="lazyload">
+            <h1>UDS诊断入门</h1>
+        </div>
+    
+
+        <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月09日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3.6k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 15 分钟</a>
+</div>
+
+        <div class="nexmoe-post-right">
+            
+        </div>
+
+        <article>
+            <p>UDS（Unified Diagnostic Services，统一的诊断服务）诊断协议是在汽车电子ECU环境下的一种诊断通信协议，一旦零部件出了问题或者出过问题，它们会把故障信息保存在内存里面，维修师傅就可以通过通信总线读取这些故障信息，比如一个ECU经历欠压故障之后，它会将欠压故障代表的DTC（诊断故障码）存储起来，可选择性保存的还有发生故障时的快照信息（比如此时的车速、读到的电压值等）。</p>
+<span id="more"></span>
+
+<p>SID：Service Identifier，诊断服务ID。UDS本质上是一种<strong>定向的通信</strong>，是一种交互协议<strong>（Request/Response）</strong>，即诊断方(Tester)给ECU发送指定的请求数据（Request），这条数据中需要包含SID，且SID处于该应用层数据的第一个字节。如果是<strong>肯定的响应</strong>（Positive Response），首字节回复**[SID+0x40]<strong>，举例子就是请求0x10，响应0x50；请求0x22，响应0x62。如果是</strong>否定的响应<strong>（Negative Response），首字节回复</strong>0x7F**，第二字节回复刚才询问的SID。比如Tester请求0x10服务，我想进入编程模式，ECU给出否定响应，首字节0x7F，第二字节回复0x10，代表我否定你的0x10服务请求，第三字节是NRC(否定响应码)，代表我否定你的依据。</p>
+<img src="/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/%E5%B8%B8%E8%A7%81%E7%9A%84NRC.png" class=""> 
+
+<h1 id="常见的诊断服务"><a href="#常见的诊断服务" class="headerlink" title="常见的诊断服务"></a>常见的诊断服务</h1><img src="/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AF%8A%E6%96%AD%E6%9C%8D%E5%8A%A1.png" class=""> 
+
+<h2 id="10诊断会话-Diagnostic-Session-Control"><a href="#10诊断会话-Diagnostic-Session-Control" class="headerlink" title="$10诊断会话 Diagnostic Session Control"></a><strong>$10诊断会话 Diagnostic Session Control</strong></h2><p>$10包含3个子功能，01 Default默认会话，02 Programming编程会话，03 Extended扩展会话，ECU上电时，进入的是<strong>默认会话（Default）</strong>。</p>
+<p>为什么设计三个会话模式呢？因为权限问题。默认会话权限最小，可操作的服务少；扩展模式通常用于解锁高权限诊断服务，例如写入数据/参数、读写诊断码；编程模式用于解锁bootloader相关的诊断服务，即程序烧录。</p>
+<p>题外话，讲个故事。这三个会话模式好比普通项目成员（默认会话）、项目组长（扩展会话）和会计（编程会话）的关系，小职员权限最小，小职员有的权限项目组长全有，项目组长还多了些其他的高端权限（如写数据、例程控制）。会计则不同，它有些自己独有的权限（刷写程序），但项目组的很多权限它没有（读/擦故障码），因为它只干会计相关的事，本身不参与项目。</p>
+<p>如果您进入了一个<strong>非默认会话</strong>的状态，一个定时器会运转，如果一段时间内没有请求，那么到时间后，<strong>诊断退回</strong>到默认会话01(最低权限)。当然，我们有一个**$3E**的服务，可以使诊断保持在非默认的状态。</p>
+<p>UDS的请求命令有4种构成方式，即SID，SID+SF（Sub-function），SID+DID（Data Identifier）（读写用），SID+SF+DID。每种服务都有自己不同的构成方式，查看服务说明即可，不用死记硬背。</p>
+<p>NRC：Negative Response Code（否定响应码）。如果ECU拒绝了一个请求，做出否定响应（Negative Response），它会在第三字节回复一个NRC。不同的NRC有不同的含义。</p>
+<p>这里提一下一个特殊的NRC——0x78，requestCorrectlyReceived-ResponsePending（RCRRP，<strong>请求已被正确接收-回复待定</strong>）。这个NRC表明请求消息被正确地接收，请求消息中的所有参数都是有效的，但是要执行的操作还没有完成，Server端还没有准备好接收另一个请求。一旦请求的服务已经完成，服务器应该发送一个积极的响应或消极的响应，响应代码应与此不同。这个NRC的消极响应可以被Server端重复，直到被请求的服务完成并且最终的响应消息被发送。</p>
+<p><strong>例子：以CAN总线网络举例。</strong>CAN帧一共8个字节，第一字节被网络层占用。(ISO 15765-2的知识)</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic2.zhimg.com/80/v2-e08028b3aed27ba0e7a86dcd97e93941_720w.png" alt="img" class="lazyload"></p>
+<p>进入01会话成功，进入02会话失败，进入03会话成功</p>
+<p>请求（Request）:02 10 02 xx xx xx xx xx ; 02是网络层单帧SF，表示应用层包含有2个字节，10是服务ID(SID)，02是子功能——进入编程会话。但ECU婉拒了它的请求</p>
+<p><strong>肯定响应</strong>:02 50 02 xx xx xx xx xx；02即应用层含两个字节，50=10+40表示对SID的肯定回复，02是子功能。</p>
+<p><strong>否定响应</strong>:03 7F 10 7E xx xx xx xx；03同上，7F表示否定响应，10是SID，7E是NRC（否定响应码）。</p>
+<h2 id="3E待机握手"><a href="#3E待机握手" class="headerlink" title="$3E待机握手"></a><strong>$3E待机握手</strong></h2><p>$3E服务用于向服务器指示诊断仪仍然连接在网络上，之前已经激活的诊断服务功能可以仍然保持激活状态。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic3.zhimg.com/80/v2-be53c3c361e5915fced2effc4dec2572_720w.png" alt="img" class="lazyload"></p>
+<p>例子：02 <strong>3E</strong> 80 00 00 00 00 00，发送一个3E服务的报文，保持非默认会话状态。80表示无需回复。</p>
+<h2 id="27安全访问"><a href="#27安全访问" class="headerlink" title="$27安全访问"></a><strong>$27安全访问</strong></h2><p>$27安全访问：ECU当中有很多数据是整车厂独有的，并不希望开放给所有客户，它需要做一个保密的设定。我们在读取一些特殊数据的时候，要先进行一个<strong>安全解锁</strong>。<strong>ECU上电之后是一个锁定的状态（Locked）</strong>，我们通过**$27**服务，加上一个子服务，再加上一个钥匙，这样的服务请求可以进行解锁。</p>
+<p>$27安全访问服务的否定响应服务ID也是7F。还记得刚才否定响应的格式吗？7F+27+NRC（否定响应码）。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic2.zhimg.com/80/v2-827de78f545e8c9b3d857deebdf12c89_720w.png" alt="img" class="lazyload">实际通信的截图，黄色位置是密钥区域</p>
+<p>例子：</p>
+<p>Tester： 02 <strong>27 05</strong> 00 00 00 00 00 安全访问，05子功能</p>
+<p>ECU： 06 <strong>67 05</strong> 08 27 11 F0 00 肯定响应，回复了对应安全级别的种子</p>
+<p>Tester： 06 <strong>27 06</strong> FF FF FF FF 00 发送密钥，4个FF。注意06是与05成对使用的。</p>
+<p>ECU： 03 <strong>7F 27 78</strong> 00 00 00 00 若为否定响应，7F+27+NRC</p>
+<p>ECU： 02 <strong>67 06</strong> 00 00 00 00 00 若为肯定响应，通过安全校验</p>
+<h2 id="22读数据"><a href="#22读数据" class="headerlink" title="$22读数据"></a><strong>$22读数据</strong></h2><p>$22读数据，Request（请求）：22+DID（Data Identifier，通常是两个字节）</p>
+<p>Response（响应）：62+DID+Data</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic1.zhimg.com/80/v2-c9e1fbe12dcc6b1dfd09fe75d9385f64_720w.png" alt="img" class="lazyload"></p>
+<h2 id="2E写数据"><a href="#2E写数据" class="headerlink" title="$2E写数据"></a><strong>$2E写数据</strong></h2><p>$2E写数据，Request（请求）：2E+DID+Data</p>
+<p>Response（响应）：6E+DID</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic4.zhimg.com/80/v2-c1e4c712af7df8c57297419937a39797_720w.jpg" alt="img" class="lazyload">写入一个VIN码</p>
+<p>正确的顺序是10开头的帧请求、30开头的帧回复、21开头再请求、22开头继续请求、03开头回复确认。我们一帧一帧来看。</p>
+<ul>
+<li>10 14根据ISO15765-2代表这是一组多帧中的首帧（属于传输层的信息），一会要发0x14=20个字节的有效数据。之后是2E+F190（代表这是VIN码）+VIN码的前3个字节。意思是作为外部工具，想写入一个VIN码数据。这件事情正常是发生在车辆下线时。</li>
+<li>30 00 0A是TP层（传输层）的信息，表示这是一个流控帧，ECU发出的，表示可以一直连续发，但连续帧最短的间隔时间要求是10ms。</li>
+<li>21是TP层的信息，表示这是一个连续帧，序号为1。后面是VIN码的第4字节到第10字节。</li>
+<li>22是TP层的信息，表示这是一个连续帧，序号为2。后面是VIN码的第11字节到第17字节。</li>
+<li>03是TP层的信息，这里说的这个TP层的信息是传不到应用层的，即这是一个用完就会抛弃的信息。03的0表示这是一个单帧，3表示后面有3个有效字节。6E表示我们确认执行了2E服务的请求，这个请求写入的ID是F1 90，即VIN码。</li>
+</ul>
+<p>注意，比如0xF190等DID不支持直接写入数据，需要用$10来进行会话转换。也就是说，对于写数据的请求，一般来说需要在一个<strong>扩展会话</strong>，和<strong>安全等级1</strong>的状态下才能进行。</p>
+<h2 id="19-读DTC"><a href="#19-读DTC" class="headerlink" title="$19 读DTC"></a><strong>$19 读DTC</strong></h2><p><strong>19服务是一套诊断服务中的重中之重。协议中篇幅长达63页，通信举例达到了18个。可以说没有19服务，就没有完整的UDS。</strong></p>
+<p>DTC（diagnostic trouble code）：如果系统检测到了一个错误，它将存储为DTC。DTC可表现为：一个显而易见的故障；通讯信号的丢失（不会使故障灯亮起）；排放相关的故障；安全相关的错误等。DTC可以揭示错误的位置和错误类型。通常DTC占用3个字节，OBD II占用两个字节。图中FTB为Fault Type Byte。</p>
+<p>故障码包括四个大类，分别是PCBU，P是powertrain动力系统，C是Chassis底盘，B是Body车身，U是network通信系统。一个DTC信息占用4个字节。最后一个字节是DTC的状态。DTMMiddleByte和DTCLowByte两个字节是我们熟知的类似P0047（ISO15031中的故障码）中“0047”的纯数字故障码。<strong>第一个字节在乘用车中，前两个bit代表P/C/B/U（动力/底盘/车身/网络）中的一个，之后六个bit是数字，合在一起的样子形如“C01”。第一个字节的前2个bit中，用00/01/10/11分别表示P/C/B/U</strong></p>
+<p>$19拥有28个子服务（Sub-Function）。常用的子服务有：</p>
+<p><strong>01 (读取符合掩码条件的DTC数量)（必须支持）</strong>,后面的参数是DTC状态掩码，若为01表示我想读当前故障，若为08表示我想读历史故障，若为09表示当前故障和历史故障都想读。</p>
+<p>在肯定回复时，组合应该是59(19+40) - 01 （子功能） - 09 （本ECU所支持的掩码条件）-01 DTC的格式（ISO14229-1为01） - 00 01 （目前满足条件的DTC有一个）</p>
+<p><strong>02（读取符合掩码条件的DTC列表及其状态）（必须支持）</strong>，后面的参数是DTC状态掩码，解读同上。</p>
+<p>在肯定回复是，59 - 02（子功能）- 09（本ECU所支持的掩码条件） - XX XX XX ( DTC,车厂定义 ) - 01 （这个故障码怎么了，01表示当前故障）</p>
+<p><strong>04（读取快照信息）</strong>，也叫冻结帧。</p>
+<p><strong>06（读取扩展信息）。</strong></p>
+<p><strong>0A（读取ECU支持的所有DTC列表及其状态）（必须支持）</strong>。这个就不必发DTC状态掩码了。所有支持的DTC列表及其状态都会打印出来。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic3.zhimg.com/80/v2-66e655dc290de2e290577bebe73df36a_720w.jpg" alt="img" class="lazyload">黄色框是DTC，紧跟着的是DTC状态</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic2.zhimg.com/80/v2-8447ef3fa5b76bf58c00c0a86ae78de1_720w.jpg" alt="img" class="lazyload">同时读取当前/历史故障，黄色框是DTC，紧跟着的是DTC状态</p>
+<p>刚才提到，一个DTC除了它自己的3个字节，<strong>还有一个字节专门用于表达DTC的状态，这个字节我们叫它DTC状态掩码</strong>。这个状态字节每个位的含义下面列举出来。注意，在实际项目中，并不是所有的DTC状态都是支持的。DTC状态掩码前7个位的理解是UDS的一个难点。</p>
+<h2 id="14清除DTC"><a href="#14清除DTC" class="headerlink" title="$14清除DTC"></a><strong>$14清除DTC</strong></h2><p>清除（复位）DTC格式，它可以改变DTC的状态。DTC状态中的八个位，除bit4和bit6外均会被清零，包含当前故障（TestFailed）和历史故障（ConfirmedDTC）。bit4和bit6这两个testNotCompleted开头的会被强制置1。</p>
+<p>3个FF代表清除所有DTC。</p>
+<p>Request：14+FF+FF+FF；</p>
+<p>Response：54 。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic1.zhimg.com/80/v2-901e517039fd104a965345380f3af5f8_720w.jpg" alt="img" class="lazyload">14服务</p>
+<h2 id="2F-IO控制"><a href="#2F-IO控制" class="headerlink" title="$2F IO控制"></a><strong>$2F IO控制</strong></h2><p>该服务可以通过DID(数据标识符)来进行输入信号的替换和控制零部件负载输出。这是一个用在产线上较多的服务。该报文的请求至少由4个字节组成。第一个字节是2F，第二第三字节是DID，其中第二字节是高位。第四字节是子功能，IO控制类型。</p>
+<p>IO控制类型分为4类，</p>
+<p>00是控制权还给ECU，Return Control To ECU。</p>
+<p>01是复位为默认值，Reset to Default。</p>
+<p>02是冻结当前的状态，Freeze Current State。</p>
+<p>03是短暂接管控制权，Short Term Adjustment。</p>
+<p>若控制类型是00-02这三种，请求报文是4个字节。</p>
+<p>若控制类型是03，请求报文的第五字节是控制代码，可以是数字量，比如01是开，00是关；也可以是模拟量，比如空调风门的开度。</p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://pic3.zhimg.com/80/v2-0c2d6e6afbc66cac1fdcd4acaab43006_720w.jpg" alt="img" class="lazyload">2F服务，黄色区域为2个字节的DID</p>
+<p>上面这个图可以理解为，关闭开关，之后打开开关，之后控制权还给ECU，之后想复位回默认值，但是发现ECU不支持。这里NRC用0x22是否准确，还望大神告知。</p>
+<p><strong>2F服务有一个问题，如果通过2F服务修改了某个值，后续也不把控制权还给ECU，那么这个修改的有效时间是一直持续下去？</strong></p>
+<p><strong>正确的做法是如果扩展会话超时，即切回默认会话，此时控制权应还给ECU，毕竟 2F的03子功能是”暂时接管控制权”。</strong></p>
+<h2 id="6种模式的配置"><a href="#6种模式的配置" class="headerlink" title="6种模式的配置"></a><strong>6种模式的配置</strong></h2><p>非默认会话在实际中又细分为<strong>编程会话</strong>（Programming Diagnostic Session）和<strong>扩展会话</strong>（Extended）。在UDS的实际应用中，我们需要对26种服务针对不同会话、不同寻址模式的支持度进行配置。</p>
+<p>也就是说，物理寻址+默认会话、物理寻址+编程会话、物理寻址+扩展会话、功能寻址+默认会话、功能寻址+编程会话、功能寻址+扩展会话，共6个模式。那么我们可以脑补一个26行、6列的表格了。</p>
+<p>举个例子，对于10、11、3E、22（22有分歧）服务，它们需要支持所有的6个模式（物理+功能寻址）。</p>
+<p>对于14、19服务，DTC相关，要求支持默认+扩展会话的4个模式（物理+功能寻址）。</p>
+<p>对于27服务，即安全访问服务，仅支持扩展+物理、编程+物理2个模式。</p>
+<p>对于2E、2F服务，仅支持扩展+物理1个模式，且要求<strong>安全等级为1</strong>。</p>
+<p>对于34、36、37服务，涉及程序下载，仅支持编程+物理1个模式，且要求<strong>安全等级为2</strong>。</p>
+<p>对于28、85服务，有些要求支持编程+扩展会话的4个模式，有些则要求仅支持扩展会话的2个模式。</p>
+<p>对于31服务，要求<strong>安全等级为1</strong>，有些要求支持扩展+物理、编程+物理2个模式，有些则要求仅支持扩展+物理1种模式。</p>
+<p>注：本文引用<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37310388">https://zhuanlan.zhihu.com/p/37310388</a></p>
+
+        </article>
+
+        
+            
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>weichang wen<br>
+    
+    <strong>Link：</strong><a href="https://wen990806.github.io/2022/01/09/UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8/" title="https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;09&#x2F;UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;09&#x2F;UDS%E8%AF%8A%E6%96%AD%E5%85%A5%E9%97%A8&#x2F;</a><br>
+
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+        
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/CAN%E5%BC%80%E5%8F%91/">CAN开发</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/2022/" rel="tag">2022</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/UDS/" rel="tag">UDS</a>
+    
+</div>
+
+    <div class="nexmoe-post-footer">
+        <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src="https://unpkg.com/leancloud-storage/dist/av-min.js"></script>
+<script src='https://unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'r5zxC0st0DDjPA9auXzMV7HY-gzGzoHsz',
+        appKey: '3bqCsovpyfTPHUzTHovd3V3V'
+    })
+</script>
+</section>
+    </div>
+</div>
+
+
+        <div class="nexmoe-post-right">
+          
+            <div class="nexmoe-fixed">
+              <div class="nexmoe-tool">
+                <a href="#" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+  <div id="nexmoe-pendant">
+    <div class="nexmoe-drawer mdui-drawer nexmoe-pd" id="drawer">
+        
+            <div class="nexmoe-pd-item">
+                <div class="clock">
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="needle" id="hours"></div>
+        <div class="needle" id="minutes"></div>
+        <div class="needle" id="seconds"></div>
+        <div class="clock_logo">
+
+        </div>
+
+    </div>
+<style>
+    .clock {
+        background-color: #ffffff;
+        width: 70vw;
+        height: 70vw;
+        max-width: 70vh;
+        max-height: 70vh;
+        border: solid 2.8vw #242424;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1.4vw 2.8vw rgba(0, 0, 0, 0.8);
+        zoom:0.2
+    }
+
+    .memory {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .memory:nth-child(1) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(-520%);
+    }
+
+    .memory:nth-child(2) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(6deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(3) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(12deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(4) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(18deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(5) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(24deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(6) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(30deg) translateY(-520%);
+    }
+
+    .memory:nth-child(7) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(36deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(8) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(42deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(9) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(48deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(10) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(54deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(11) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(60deg) translateY(-520%);
+    }
+
+    .memory:nth-child(12) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(66deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(13) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(72deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(14) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(78deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(15) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(84deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(16) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(90deg) translateY(-520%);
+    }
+
+    .memory:nth-child(17) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(96deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(18) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(102deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(19) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(108deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(20) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(114deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(21) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(120deg) translateY(-520%);
+    }
+
+    .memory:nth-child(22) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(126deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(23) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(132deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(24) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(138deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(25) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(144deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(26) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(150deg) translateY(-520%);
+    }
+
+    .memory:nth-child(27) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(156deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(28) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(162deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(29) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(168deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(30) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(174deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(31) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(180deg) translateY(-520%);
+    }
+
+    .memory:nth-child(32) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(186deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(33) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(192deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(34) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(198deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(35) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(204deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(36) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(210deg) translateY(-520%);
+    }
+
+    .memory:nth-child(37) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(216deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(38) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(222deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(39) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(228deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(40) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(234deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(41) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(240deg) translateY(-520%);
+    }
+
+    .memory:nth-child(42) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(246deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(43) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(252deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(44) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(258deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(45) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(264deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(46) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-520%);
+    }
+
+    .memory:nth-child(47) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(276deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(48) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(282deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(49) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(288deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(50) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(294deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(51) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(300deg) translateY(-520%);
+    }
+
+    .memory:nth-child(52) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(306deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(53) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(312deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(54) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(318deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(55) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(324deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(56) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(330deg) translateY(-520%);
+    }
+
+    .memory:nth-child(57) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(336deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(58) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(342deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(59) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(348deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(60) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(354deg) translateY(-1461%);
+    }
+
+    .needle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .needle#hours {
+        background-color: #1f1f1f;
+        width: 4%;
+        height: 30%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#hours.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#hours:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#minutes {
+        background-color: #1f1f1f;
+        width: 2%;
+        height: 45%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#minutes.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#minutes:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#seconds {
+        background-color: #cb2f2f;
+        width: 1%;
+        height: 50%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#seconds.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#seconds:after {
+        content: '';
+        background-color: #cb2f2f;
+        width: 2.5vw;
+        height: 2.5vw;
+        max-width: 2.5vh;
+        max-height: 2.5vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .clock_logo{
+        width: 10vw;
+        height: 10vw;
+        max-width: 10vh;
+        max-height: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    @media (min-width: 100vh) {
+        .clock {
+            border: solid 2.8vh #242424;
+            box-shadow: 0 1.4vh 2.8vh rgba(0, 0, 0, 0.8);
+        }
+    }
+
+</style>
+
+
+
+
+
+            </div>
+        
+            <div class="nexmoe-pd-item">
+                <div class="qweather" >
+    <div id="he-plugin-standard"></div>
+    <div class="qweather-logo">
+
+    </div>
+
+</div>
+<style>
+    .qweather{
+        position: relative;
+    }
+    .qweather-logo{
+        position: absolute;
+        right: 0;
+        top: -15px;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+<script>
+  WIDGET = {
+    "CONFIG": {
+      "layout": "2",
+      "width": "260",
+      "height": "220",
+      "background": "5",
+      "dataColor": "e67249",
+      "borderRadius": "15",
+      "key": "f74d1e1690e6432d801e97fa2f05a162"
+    }
+  }
+</script>
+<script src="https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"></script>
+
+            </div>
+        
+</div>
+<style>
+    .nexmoe-pd {
+        left: auto;
+        top: 40px;
+        right: 0;
+    }
+    .nexmoe-pd-item{
+       display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+  </div>
+  <script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/10.0.0/highlight.min.js"></script>
+<script src="https://unpkg.com/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/app.js?v=1653562722946"></script>
+
+<script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="/js/clock.js"></script>
+
+<script src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js"></script>
+
+<script src="/lib/codeBlock/codeBlockFuction.js"></script>
+
+<script src="/lib/codeBlock/codeLang.js"></script>
+
+<script src="/lib/codeBlock/codeCopy.js"></script>
+
+<script src="/lib/codeBlock/codeShrink.js"></script>
+
+<link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/webapp.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
+
+<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/250cb4aa.js","daovoice")</script>
+<script>
+  daovoice('init', {
+    app_id: "250cb4aa"
+  });
+  daovoice('update');
+</script>
+
