@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+  <title>Autosar（中级篇） - anchor blog</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+
+  <link rel="shortcut icon" href="/img/123.jpg" type="image/png" />
+  <meta name="description" content="Autosar(中级篇)一、通信相关机制1、Signal GroupsSignal Groups，信号组。也就是将一些作用相近的信号放到一个组里面方便管理。在下一节中会讲到一个信号的失效性，如果放在一个组里面的信号有一个失效了，那么这个信号组的所有信号都被认为失效。这么做是为啥呢？比如现在我有一个陀螺仪传感器的三个姿态的信号放在一个Signal Groups中，这个时候假如陀螺仪失效了，那么这三个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Autosar（中级篇）">
+<meta property="og:url" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/index.html">
+<meta property="og:site_name" content="anchor blog">
+<meta property="og:description" content="Autosar(中级篇)一、通信相关机制1、Signal GroupsSignal Groups，信号组。也就是将一些作用相近的信号放到一个组里面方便管理。在下一节中会讲到一个信号的失效性，如果放在一个组里面的信号有一个失效了，那么这个信号组的所有信号都被认为失效。这么做是为啥呢？比如现在我有一个陀螺仪传感器的三个姿态的信号放在一个Signal Groups中，这个时候假如陀螺仪失效了，那么这三个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_1.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_2.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_3.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_4.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_5.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_6.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_7.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_8.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_9.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_10.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_11.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_12.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_13.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_14.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_15.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_16.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_17.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_18.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_19.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_20.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_21.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_22.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_23.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_24.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_25.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_26.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_27.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_28.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_29.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_30.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_31.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_32.png">
+<meta property="article:published_time" content="2022-01-22T03:10:57.000Z">
+<meta property="article:modified_time" content="2022-05-25T09:54:19.363Z">
+<meta property="article:author" content="weichang wen">
+<meta property="article:tag" content="2022">
+<meta property="article:tag" content="Autosar">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image.png">
+  <link rel="stylesheet" href="https://unpkg.com/highlight.js@9.15.8/styles/atom-one-dark.css" crossorigin>
+  <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
+  
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1653562397273">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(/images/background/duola.jpg)"></div>
+    <div class="nexmoe-small" style="background-image: url(/images/background/chibao.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="weichang wen" class="mdui-btn mdui-btn-icon"><img src="/img/123.jpg" alt="weichang wen"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="weichang wen">
+            <img src="/img/123.jpg" alt="weichang wen" alt="weichang wen">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div class="nexmoe-count-item"><span>Articles</span>18 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>Tags</span>7<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Categories</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+<!-- 站内搜索 -->
+
+<div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search" >
+        <form id="search-form">
+            <label><input type="text" id="local-search-input" name="q" results="0" placeholder="站内搜索" class="input form-control" autocomplete="off" autocorrect="off"/></label>
+            <!-- 清空/重置搜索框 -->
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+        </form>
+    </div>
+    <div id="local-search-result"></div> <!-- 搜索结果区 -->
+    <!-- <p class='no-result'></p> 无匹配时显示，注意在 CSS 中设置默认隐藏 -->
+</div>
+
+
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://www.bilibili.com/" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CAN开发/">CAN开发</a>
+          <span class="category-list-count">10</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活足迹/">生活足迹</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/面试/">面试</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 14px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16px;">can</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 12px;">通信原理</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 weichang wen
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/tangyuxian/hexo-theme-tangyuxian" target="_blank">Tangyuxian</a><br/>
+        <a href="http://beian.miit.gov.cn" target="_blank"></a><br/>
+        
+        <div style="font-size: 12px">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量  <a id="busuanzi_value_site_pv"></a> 次<br />
+            本站访客数<a id="busuanzi_value_site_uv"></a>人次
+        </div>
+        
+        
+    </div>
+
+</div><!-- .nexmoe-drawer -->
+
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: NaN%;">
+            <img data-src="/2022/01/15/Autosar实践基本操作/autosar.png" data-sizes="auto" alt="Autosar（中级篇）" class="lazyload">
+            <h1>Autosar（中级篇）</h1>
+        </div>
+    
+
+        <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月22日</a>
+    <a><i class="nexmoefont icon-areachart"></i>6.8k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 29 分钟</a>
+</div>
+
+        <div class="nexmoe-post-right">
+            
+        </div>
+
+        <article>
+            <h1 id="Autosar-中级篇"><a href="#Autosar-中级篇" class="headerlink" title="Autosar(中级篇)"></a>Autosar(中级篇)</h1><h2 id="一、通信相关机制"><a href="#一、通信相关机制" class="headerlink" title="一、通信相关机制"></a>一、通信相关机制</h2><h3 id="1、Signal-Groups"><a href="#1、Signal-Groups" class="headerlink" title="1、Signal Groups"></a>1、Signal Groups</h3><p>Signal Groups，信号组。也就是将一些作用相近的信号放到一个组里面方便管理。在下一节中会讲到一个信号的失效性，如果放在一个组里面的信号有一个失效了，那么这个信号组的所有信号都被认为失效。这么做是为啥呢？比如现在我有一个陀螺仪传感器的三个姿态的信号放在一个Signal Groups中，这个时候假如陀螺仪失效了，那么这三个姿态信号其实有一个是失效了，这三个信号都是没有意义的（姿态解算就会出问题），所以这个Groups里的三个信号都显示为失效。</p>
+<span id="more"></span>
+
+<p>Signal Groups由通信矩阵定义，所以一般是由OEM设计</p>
+<h3 id="2、Update-Bit"><a href="#2、Update-Bit" class="headerlink" title="2、Update Bit"></a>2、Update Bit</h3><p>简单的说就是在Signal中将一个bit保留用做Update Bit，这个Update Bit一般是和下一节我们会讲到的Deadline Monitoring超时监控一起来使用的。这个位是专门用来指示信号是否被应用层更新了，如果长时间没有被更新，就启动超时处理。比如下图所示，我们从左往右分析：</p>
+<ol>
+<li><p>发送方在应用层更新了Signal A的数据，然后COM模块就自动的将Update Bit置位，表示这个信号被更新了；这时Signal B没有被更新所以Update Bit还是0</p>
+</li>
+<li><p>然后将Signal A和B通过通信传给接收方 </p>
+</li>
+<li><p>接受方收到Signal A和B之后开始解析，发现Signal A被更新过了是可用数据，就进入Signal Notification去处理了；但是Signal B没有被更新，就进入超时监控处理去了</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image.png" class=""></li>
+</ol>
+<p>Update Bit由通信矩阵定义，所以一般是由OEM设计</p>
+<h3 id="3、Notification-Mechanisms"><a href="#3、Notification-Mechanisms" class="headerlink" title="3、Notification Mechanisms"></a>3、Notification Mechanisms</h3><p>Notification Mechanisms，通知机制。通知主要有下面几类，常用的就是接收（Rx indication）和发送（Tx confirmation）成功的通知，都是在Communication-&gt;Signals中做配置的。</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_1.png" class="">
+
+<p>但是通知具有一个重要属性：立即通知（Immediate）和 延迟通知（deferred），这个属性是在Communication-&gt;PDUs中配置的</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_2.png" class="">
+
+<p> 立即通知：就是接受/发送成功立即中断式的进入通知函数 </p>
+<p> 延迟通知：不是马上就通知，在下一次在Task中调用Com_MainFunctionRx()或者Com_MainFunctionTx()的时候触发通知</p>
+<h3 id="4、Deadline-Monitoring"><a href="#4、Deadline-Monitoring" class="headerlink" title="4、Deadline Monitoring"></a>4、Deadline Monitoring</h3><img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_3.png" class="">
+
+<h4 id="（1）超时监控"><a href="#（1）超时监控" class="headerlink" title="（1）超时监控"></a>（1）超时监控</h4><p>Deadline Monitoring，超时监控。超时监控之前在Update Bit中也提到过，但是超时监控可以分为两个等级：</p>
+<p> IPDU级：当一个Rx IPDU没有在规定的时间内收到有效数据，就启动超时处理 </p>
+<p> Signal级：就是之前我们说过的Update Bit的方式，如果没有收到Update Bit，就启动超时处理</p>
+<p>值得一提的是：在Dev和Cfg（COM）中都可以配置Deadline Monitoring的Timeout Time，但是最后都是要同步到Cfg中做代码生成的。还有一点是IPDU的Timeout Time的来源是在IPDU中的Signal的最小Timeout Time。比如也就是说IPDU中有两个Signal，Signal A的Timeout Time=100ms，Signal B的Timeout Time=50ms，那么这个IPDU的Timeout Time = 50ms</p>
+<h4 id="（2）超时处理"><a href="#（2）超时处理" class="headerlink" title="（2）超时处理"></a>（2）超时处理</h4><ol>
+<li>COM的超时处理</li>
+</ol>
+<p>超时之后会有一个超时的Notification被调用：Rte_COMCbkTOut_<ComSignalName> </p>
+<p> 可选：可以选择将超时的信号复位位初始值（需要配置ComRxDataTimeoutAction）</p>
+<ol start="2">
+<li>RTE的超时处理 </li>
+</ol>
+<p>超时之后可以触发一个Runnable来处理</p>
+<p>在使用相关Rte_Read_<Pp>_<De>的时候会返回错误RTE_E_MAX_AGE_EXCEEDED</p>
+<p>在使用Rte_IRead这样的Buffer类型的S/R接口的时候，状态可以由Rte_IStatus决定</p>
+<h3 id="5、Invalidation"><a href="#5、Invalidation" class="headerlink" title="5、Invalidation"></a>5、Invalidation</h3><h4 id="（1）失效机制"><a href="#（1）失效机制" class="headerlink" title="（1）失效机制"></a>（1）失效机制</h4><p>Invalidation，失效机制。之前也是提过一嘴，当一个Signal Groups中任何一个Signal被设置为无效的时候，整个Groups就都被设置为无效了，不允许一半有效一半无效的Signal Groups出现。失效的信号可以通过Rte_Inmalidate(explicit API)或者Rte_IInvalidate(implicit API)来发送一个失效值</p>
+<h4 id="（2）失效处理"><a href="#（2）失效处理" class="headerlink" title="（2）失效处理"></a>（2）失效处理</h4><p>失效的处理有三种方式：</p>
+<p> Keep: 保持原值不变</p>
+<p> Replace: 用一个初始值替换</p>
+<p> None: 不做任何处理，等于是这个失效机制没有起作用</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_4.png" class="">
+
+<h3 id="6、Data-Mapping概述"><a href="#6、Data-Mapping概述" class="headerlink" title="6、Data Mapping概述"></a>6、Data Mapping概述</h3><p>在Davinci Cfg中，数据是不能直接放在IPDU上的，必须要映射到相应的Signals上才行。Signals一般是由通信矩阵定义的，但是通信矩阵并不知道程序中究竟用的是哪个数据进行传输的，因此需要将我们在Dev中定义的数据（Data Elements）和Signal（Network Signals）相映射才可以正常使用。在Davinci中，映射可以至下而上，也可以至上而下，说人话就是在Cfg中和Dev中都可以配置这一功能，之后导入到另一方中就行了，但也分为两种情况：</p>
+<p> 在ECU SW Composition这个层级中： 在Cfg和Dev中都可以配置Data Mapping；但是需要做Delegation Ports，也就是将我们的通信ports做一个逻辑上的与其他ECU相连的操作</p>
+<p>  在Atomic SWCs这个层级中： 只能在Cfg中做配置，同时不需要做Delegation Ports</p>
+<p>首先来说一下在Dev中做Delegation ports的操作，在我们完成端口的实体化之后，可以右键-&gt;Complete Ports…，然后出现下图的对话框，选择Delegation Ports only，然后就能看见端口延申出去了，含义是连接上了更高一层级的SWC</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_5.png" class="">
+
+<p>下面就是在Dev中做Data Mapping后，出来的效果</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_6.png" class="">
+
+<p>在Cfg中也会出现相应的信息显示</p>
+<h4 id="7、我们的数据是如何层层的传输到总线上，这些跨层级的传递是如何配置的"><a href="#7、我们的数据是如何层层的传输到总线上，这些跨层级的传递是如何配置的" class="headerlink" title="7、我们的数据是如何层层的传输到总线上，这些跨层级的传递是如何配置的"></a>7、<strong>我们的数据是如何层层的传输到总线上，这些跨层级的传递是如何配置的</strong></h4><img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_7.png" class="">
+
+<h2 id="二、模式管理"><a href="#二、模式管理" class="headerlink" title="二、模式管理"></a>二、模式管理</h2><p>在BSW层中，当满足一些规则（Rules）的时候，执行相应的动作（Action），这就是模式管理</p>
+<p>模式管理中，经常会用到的几个概念：</p>
+<p>  Mechanisms for notification: 通知机制。比如在模式切换的时候会发出一个通知，告诉我们需要被通知的地方（比如应用层的某个SWC）模式切换了 </p>
+<p> Service requests for mode changes： 应用层可以主动请求一个模式切换</p>
+<p>  Mode arbitration： 模式仲裁。也就是判断当前状态是否满足Rules，需要进行模式切换不 </p>
+<p> Mode control： 模式控制。也就是执行相应的Action</p>
+<h3 id="1、BswM概述"><a href="#1、BswM概述" class="headerlink" title="1、BswM概述"></a>1、BswM概述</h3><p>BswM就是一个基于Rules的服务模块，主要工作就是上面讲到的根据制定的Rules，执行相应的Action。下图之前我们放过一次，这里多讲讲：可以看到这里有三个Auto Configuration，那都是DaVinci自动配置的部分，然后下面的Miscellaneous就是我们用户自己定义的部分（当然其实一般来说都不必自己定义）。</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_8.png" class="">
+
+<p>还有一点是，对Rules的评估是可以有两种形式的：立即 和 延迟</p>
+<p> 立即：当然就是被call了之后立马开始了 </p>
+<p> 延迟：在被call之后，需要执行到BswM_MainFunction()这个函数的时候，才开始，所以会有一定的延迟</p>
+<h4 id="（1）BswM执行流程"><a href="#（1）BswM执行流程" class="headerlink" title="（1）BswM执行流程"></a>（1）BswM执行流程</h4><p>还是举个实际的例子，大家可能比较容易理解，这里就找了自动配置中的Ect State Handing中的InitToWakeup来说明：</p>
+<ol>
+<li>首先在Rules中大家可以看到ESH_InitToWakeup这个规则，而这个规则首先需要一个表达式，表达式可以在下面的Expressions中定义，这个定义也会出现在图中蓝色方框里面的地方。这里就是说当ECU的状态处于Init初始化的时候，就满足了我们的条件</li>
+</ol>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_9.png" class="">
+
+<p>2.我们接着看，在Rules下面就是我们在规则判断为真时执行的Action List（Action List就是几个Action的集合体）。从图中的Action List可以看到有三个Action，分别做了三件事：  ESH_Action_OnEnterWakeup: 调用BswM_ESH_OnEnterWakeup()这个Callout函数  ESH_Action_SwitchWakeup: 通知我们的SWC，进行模式切换  ESH_Action_ESH_Wakeup: 请求我们的被调模块进行模式切换</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_10.png" class="">
+
+<p>3.到这里为止，BswM的工作就完成了，接下来就需要被调的Bsw模块自己进行模式切换了</p>
+<h3 id="2-EcuM"><a href="#2-EcuM" class="headerlink" title="2.EcuM"></a>2.EcuM</h3><p>EcuM其实有两种定义：Flexible（灵活的）和Fixed（固定的），一般来说我们使用的都是Flexible的方式，Fixed一般会用在AutoSAR 3.x上。所以我们重点讲解Flexible的EcuM 其实EcuM很好理解，就是管理Ecu状态的，至于Ecu的状态，基本就是OFF、UP和SLEEP了。但是这其中又包含很多其他的内容，比如在UP的时候，会需要初始化BSW、OS和RTE等；对唤醒事件的处理等内容的处理。说白了，EcuM就是用来管理EcuM的上下电和睡眠这些模式的。 </p>
+<p>这里还要谈谈EcuM和BswM的关系，因为大家经常会混为一谈，觉得Ecu比Bsw大，就像EcuM能管住Bsw一样，其实他们的关系并非上下级，而更像是合作的关系。BswM会和很多的带M的模块交流，来配合管理其模式，所以EcuM也是一样，BswM能和EcuM交流来管理其模式（所以上面的BswM中我们才能配置Ecu State Handing嘛）。但是EcuM会管理到Ecu的上下电的状态，所以假如Ecu都下电了，那还谈何的BswM模式管理。所以他们两更算是分工合作的。</p>
+<h4 id="1-EcuM-的上下电流程"><a href="#1-EcuM-的上下电流程" class="headerlink" title="(1)  EcuM 的上下电流程"></a>(1)  EcuM 的上下电流程</h4><p>上下电，说白了就是给Ecu上下电后，Ecu的代码执行顺序。这里还讲到了大家可能经常会用到的Sleep流程，主要就是可以归纳为以下这张图，大家掌握这张图就基本掌握了EcuM的上下电流程了。这张图的具体内容博主将在下面做进一步讲解，大家看完本节后再回头看看这样图，就能理解了</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_11.png" class="">
+
+<p><strong>上电（StartUp）</strong></p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_12.png" class="">
+
+<p>上电的流程，大家可以类比着我们的Windows或者Linux操作系统来考虑。主要分为四个阶段：</p>
+<ol>
+<li>上电： 首先是由cstart.c这样的引导代码，引导CPU跳入mian()函数。然后在main()函数中做OS的初始化准备（这时还没启动OS，只是初始化；就像ADC_Init 和 ADC_Start的区别） </li>
+<li>预启动OS： 在预启动的阶段，会进入EcuM_Init，在这里面会做一些Error的判断，最后就是启动OS了 </li>
+<li>启动OS之后： 启动OS之后，会进入到一个Task中，被称为Init Task，这里会调用EcuM_StartupTwo()函数，在这个函数中主要做了SchM和BswM的初始化，并且在这里就通过BswM可以将ADC、PORT等这些底层的驱动模块都初始化了</li>
+<li>启动BswM之后： 启动BswM之后就算是完成了Startup的阶段，然后会进行Rte_Start()，之后就进入了UP的阶段了，算是可以正常运行了</li>
+</ol>
+<p><strong>下电（Shutdown）</strong></p>
+<p>大家使用单片机的时候经常是只管上电，不管下电的。但是一旦有了OS之后，下电的流程也是必须的，就像我们从来没有见过Windows在点击关机之后立马就息屏了吧？一般都会看见一个正在关机的字样。所以下电也是有一套流程的</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_13.png" class="">
+
+<p>所以下电的流程也可以分为这么四个阶段：</p>
+<ol>
+<li>BswM通知EcuM下电： 最关键的就是EcuM_GoDown()这个函数，当调用之后，就进入到EcuM的下电流程了 </li>
+<li>预关闭OS： 这里面就是做一些Deinit的操作，然后设置一下下电的设置，最后关闭OS </li>
+<li>关闭OS： 这里会调用一个ShutDownHook()，来让用户处理关闭OS的一些定制工作 </li>
+<li>关闭OS之后： 这里会依据不同的下电需求（直接关机还是重启），进入到不同的动作中去</li>
+</ol>
+<p><strong>睡眠（Sleep）</strong></p>
+<p>睡眠模式大家可能不是最常用的，但是在消费级的一些小家电上会经常看到这种状态，因为睡眠模式一般是为了节能。进入睡眠会有两种模式：Poll或Halt，就是不断循环或停止的模式。</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_14.png" class="">
+
+<ol>
+<li>准备睡眠： 就是GoSleep阶段，先使能唤醒源，然后指定唤醒源当前的状态，最后GetResource，这之后将由EcuM接管。</li>
+<li>进入睡眠： 睡眠有两种状态：</li>
+</ol>
+<p>  进入Poll的话：先设置MCU状态Mcu_SetMode(ECUM_SLEEP…)，然后执行EcuM_Mainfunction，进入后就是激活唤醒源，然后不断的检查是否被唤醒了 </p>
+<p> 进入Halt的话：先设置Global Suspend，然后生成Ram Hash，接着设置MCU状态Mcu_SetMode(ECUM_HALT…)，然后Global Restore使得全局恢复。如果在Halt下想要唤醒，需要检查Ram Hash </p>
+<ol start="3">
+<li>唤醒： 首先设置MCU状态Mcu_SetMode(ECUM_NORMAL…)，然后禁止唤醒源，接着重启各类底层驱动，最后就是RelsaseResource，唤醒之后由BswM接管</li>
+</ol>
+<h4 id="2-BswM-配置"><a href="#2-BswM-配置" class="headerlink" title="(2)  BswM 配置"></a>(2)  BswM 配置</h4><img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_15.png" class="">
+
+<p>不过既然是自动配置的，其实我们也不用太在这里花时间，记住一点就行：那就是勾上我们在ESH中需要用到的选项。注意直接打勾是勾不上的，必须点进去Configure Ecu State Handing这个页面里才能打勾，这里一般能勾的全勾上就行</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_16.png" class="">
+
+<p><strong>Module Initialization</strong></p>
+<p>这个初始化是位于OS启动后，在初始化BswM之后，由BswM进行对所有BSW中可管控模块的初始化。所以理论上来讲，Port、Dio这些也都可以在这里初始化，在图中勾上就可以了 这</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_17.png" class="">
+
+<h3 id="三、网络管理"><a href="#三、网络管理" class="headerlink" title="三、网络管理"></a>三、网络管理</h3><p>AutoSAR网络管理的目的其实就是为了降低汽车的功耗，当网络上没有信息交互时，网络将进入睡眠模式。AutoSAR的网络管理（Network）是通过网络管理报文（NM Message）实现的，主要分为三大模式：</p>
+<p> 网络模式（Network Mode）</p>
+<p> 预睡眠模式（Prepare Sleep Mode）</p>
+<p> 睡眠模式（Bus-Sleep Mode）</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_18.png" class="">
+
+<h4 id="（1）Network-Mode"><a href="#（1）Network-Mode" class="headerlink" title="（1）Network Mode"></a>（1）Network Mode</h4><p>当处于网络模式时，可以正常的收发普通报文，CAN收发器处于正常的工作状态。当ECU上电后通信网络会自动进入Bus-Sleep状态，然后通过唤醒源唤醒后进入Network Mode的Repeat Message State中</p>
+<p><strong>1、Repeat Message State（帧重复状态）</strong></p>
+<p>当进入Repeat Message State后，会根据设定按照一定的周期重复的发送一系列的NM Message，目的是告诉其他的节点，我当前的节点被唤醒了。这里又要分为主动进入和被动进入Repeat Message State：</p>
+<p>主动进入就是我的节点因为有报文要发送，需要激活我的通信网络来发送报文，就要主动进入Repeat Message State </p>
+<p> 被动进入就是因为其他节点进入后发送了一系列重复的NM Message，而收到这些NM Message的节点就被被动进入了</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_19.png" class="">
+
+<p>上图中当ECU1要发送消息给ECU2了，这时它会主动进入Repeat Message State，开始自己这个节点的网络传输，当它快速的发出了第一帧NM Message（就是上图中蓝色的向下箭头），ECU2接收到这一帧NM Message之后，ECU2被动进入Repeat Message State，同样也开始重复的传输NM Message，当这两个ECU都发足了规定数量的Repeat Message后分别进入各自的Normal State中</p>
+<p>还有重要的一点： 当进入Repeat Message State后，会开启一个计时器T_NM_TIMEROUT，这个计时器在发送或收到一帧NM Message的时候会自动清零，当计时器处在Normal State或Ready Sleep State下的时候如果超时就会进入到Prepare Sleep Mode，也就是触发进入Prepare Sleep Mode的条件</p>
+<p><strong>2、Normal State（正常运行状态）</strong></p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_20.png" class="">
+
+<p>在正常模式下，NM Message也会周期性的发送，防止T_NM_TIMEROUT超时。每次发送NM Message就会更新T_NM_TIMEROUT。当这时ECU不再准备发送和接收数据后，就可以进入到Ready Sleep State，Ready Sleep State不再发送NM Message</p>
+<p><strong>3、Ready Sleep State（准备睡眠状态）</strong></p>
+<p>在Ready Sleep State下，还有其他节点会发网络管理帧保持网络唤醒，此时ECU处于等待进入Prepare Sleep Mode，T_NM_TIMEROUT仍然会因为NM Message而清零。所以这样的结果就是，当网络上所有的ECU发出了最后一帧NM Message（之后没有ECU再发送NM Message），大家都同步清零T_NM_TIMEROUT，如果设置的T_NM_TIMEROUT相同，会同步进入Prepare Sleep Mode阶段</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_21.png" class="">
+
+<p><strong>4、Prepare Sleep Mode</strong></p>
+<p>到这个阶段的时候，就是等待，让所有的节点有时间结束网络活动，所有的总线静默。然后在等待T_WAIT_BUS_SLEEP时间后，所有节点进入Bus-Sleep Mode</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_22.png" class="">
+
+<p><strong>5、Bus-Sleep Mode</strong></p>
+<p>当ECU上电后会默认进入Bus-Sleep Mode，而且网络其实是在不断的试图进入到Bus-Sleep Mode中，但是由于有NM Message在总线上的传输，所以才能保留网络模式不进入Bus-Sleep Mode中。大家可以想象成看门狗，NM Message就是不断的喂狗，一旦没有NM Message，就进Bus-Sleep Mode</p>
+<h3 id="四、ComM"><a href="#四、ComM" class="headerlink" title="四、ComM"></a>四、ComM</h3><p>ComM就像一个通信的总开关，它可以管住CAN、LIN和以太网等相关的通信网络。主要有三种状态：</p>
+<p> Full Communication（全通信）</p>
+<p> Silent（静默状态）</p>
+<p> No Comunication（不通信）</p>
+<p>ComM可以通过NM（Network Manager）去保持network的唤醒，同时也可以通过SM（State Manager）去激活通信，总而言之就像一个通信的总管。下面会通过两种唤醒源来解释一下ComM的状态机。</p>
+<h3 id="1、内部唤醒"><a href="#1、内部唤醒" class="headerlink" title="1、内部唤醒"></a>1、内部唤醒</h3><ol>
+<li>当ComM初始化的时候会首先进入到No Communication中，这个状态下会不断循环的去判断有没有本地或者远程的唤醒请求 </li>
+<li>这时在循环中判断出本地通信请求Api执行，则开始了往Full Communication走（Allow 通道、让CanSM打开通信） </li>
+<li>然后这时NM会处于主动激活状态，会快速的发送一系列的NM Message。之后就进入了Full Communication </li>
+<li>进入Full Communication后由于是内部唤醒，会首先进入Network Requested，执行正常的发送接收信息的状态，能一直主动去保持Network的唤醒状态 </li>
+<li>一旦本地COM Mode释放后，则进入Ready Sleep状态</li>
+<li>如果这时其他ECU也都没啥要通信的，Network进入Prepare Bus Sleep状态后，ComM开始停止Tx IPDUs，不再发送数据，进入Slient状态</li>
+<li>在Slient状态下如果收到了NM Message，则又回到Full Communication中 </li>
+<li>在Slient状态下如果没有收到NM Message，并且这时收到了NM Bus-Sleep的指示，则让CanSM去关闭通信，然后进入No Communication的状态</li>
+</ol>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_23.png" class="">
+
+<h3 id="2、外部唤醒"><a href="#2、外部唤醒" class="headerlink" title="2、外部唤醒"></a>2、外部唤醒</h3><p>如果被外部唤醒，NM会进入被动状态（Passive）。然后当ComM进入Full Communication后也会默认往Ready Sleep状态里面去跑，不会去保持Network的唤醒状态</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_24.png" class="">
+
+<h3 id="3、状态关联"><a href="#3、状态关联" class="headerlink" title="3、状态关联"></a>3、状态关联</h3><img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_25.png" class="">
+
+<ol>
+<li>只有当EcuM处于UP状态下才能保持ComM的Full Communication状态和Slient状态 </li>
+<li>CanNm的状态机就是上一节中我们讲到的那些内容，这里以状态机图的形式展示出来了 </li>
+<li>ComM能全权负责本ECU的通信状态，也就是管理SM模块，但是Network的状态不光是本ECU有关，还和其他的ECU有关，所以ComM对NM是有一定的协调作用，并非全权管理</li>
+</ol>
+<h2 id="五、服务映射"><a href="#五、服务映射" class="headerlink" title="五、服务映射"></a>五、服务映射</h2><p>大家可以想象一下，我们的BSW的模块那么多，当我们配置好了以后，如何和我们的应用层实现交流的呢？比如，当我们配置好了EcuM模块，EcuM有一个功能是管理ShutdownTarget，也就是确定我在Shutdown之后是关机呢还是重启呢，这一点有时需要应用层指明。那么当我们配置好了EcuM模块之后，EcuM会留出一个标准AutoSAR接口供应用层调用，但是我们的AppL和BSW之间是有RTE阻隔的，所以需要进行Service Mapping，在AppL和BSW之间架起一道鹊桥，将这个标准AutoSAR接口与我们的AppL间接相连（也是需要RTE管理的）</p>
+<h2 id="六、BSW-中的存储模块"><a href="#六、BSW-中的存储模块" class="headerlink" title="六、BSW 中的存储模块"></a>六、BSW 中的存储模块</h2><h3 id="1-NvM（Nonvolatile-Memory-Manager）"><a href="#1-NvM（Nonvolatile-Memory-Manager）" class="headerlink" title="1.NvM（Nonvolatile Memory Manager）"></a>1.NvM（Nonvolatile Memory Manager）</h3><p>也像是ComM一样，是一个总管。ComM是负责总管通信，而NvM负责总管存储；同样的，ComM可以管理CAN、LIN这些总线，NvM可以管理Flash、EEPROM这些存储器，都做到了对不同硬件统一的管理。NvM主要具有以下的功能：</p>
+<p>1、排队管理机制</p>
+<p>当有数据想要存入Memory的时候，由于Flash和EEPROM都需要先擦除再写入，速度会比RAM慢很多，所以会产生数据的排队。</p>
+<p> 而排队机制可以手动配置是FIFO或者是带有优先级的队列这两种方式 </p>
+<p> 可以配置队列的深度</p>
+<p>  支持立即数据（immediate data，即要求立即写入的数据，比如crash data）的快速写入，即可以不用排队 </p>
+<p>2、上下电的存储处理</p>
+<p>之前在讲上下电的时候，图中应该会有一些关于Memory的处理，就是通过NvM来做出处理</p>
+<p>  在上电的时候，要读取NV里的必要的数据</p>
+<p>  在下电的时候，要将必要的数据写入NV里面</p>
+<p>3、支持数据校验 </p>
+<p>主要利用CRC校验检查是否数据出错</p>
+<p> 当校验出错时，触发使用默认数据（直接使用或者也可以CallBack）</p>
+<p>4、数据的写保护 </p>
+<p>就如同我们写Flash要先解锁一样；还有一种方式是设置成单次写入，仅允许写入一次</p>
+<p>5、对数据的冗余存储 </p>
+<p>主要就是增加一些关键数据的可靠性</p>
+<h3 id="2-FEE"><a href="#2-FEE" class="headerlink" title="2 FEE"></a>2 FEE</h3><p>Fee（Flash EEPROM Emulation）是对Falsh仿EEP的一个抽象的具体实现。Flash被抽象成了一个一个的Flash Sector，Flash Sector又分为了一个一个的Flash Page。</p>
+<p> Flash Sector： 就是Flash能擦除的最小单元，也可以配置为更大</p>
+<p>  Flash Page： Fee只能通过Flash Page去访问Flash，也就是Fee的最小单元，Flash Sector包含Flash Page，如下图：</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_26.png" class="">
+
+<p>下面两点需要大家注意：</p>
+<ol>
+<li>Fee会调用Flash驱动（FLS）去实现对硬件的真正的擦除和写入等功能；但是Flash由于寿命的原因，不能老是擦除同一个地址的Flash，所以Fee还会自动管理写入的地址，尽量平均的去写入数据 </li>
+<li>Fee对Flash写入的时候，是会先备份一遍的，再进行擦除。也就是说我们至少需要两个Flash Sector。过程是：首先将要擦除的Sector的数据都备份到另一个Sector中，然后擦除该Sector，之后一个page一个page的写入数据，直到将这个Sector写满</li>
+</ol>
+<h3 id="3-Ea"><a href="#3-Ea" class="headerlink" title="3   Ea"></a>3   Ea</h3><p>Ea（EEPROM Abstraction）是对EEPROM 的抽象，它也是调用EEPROM的驱动（EEP）来实现最终的操作，同样，它也会考虑EEPROM的寿命问题来将存储的数据做一个均摊。但Ea与Flash不同是，EEPROM不用一块一块的擦除，它比较灵活，可以定点写入数据。所以它可以以交替的形式把一个Block写入几个Memroy Locations里面，如下图：</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_27.png" class="">
+
+<h3 id="4-NVRAM-Block"><a href="#4-NVRAM-Block" class="headerlink" title="4 NVRAM Block"></a>4 NVRAM Block</h3><p>同通信的PDU一样，存储功能也需要一些特殊的数据结构来存放和管理我们的NV数据（NV data）</p>
+<p>NVRAM Block的作用类似于IPDU，但它们两仅仅只是作用上相似，其功能实现是完全不同的。首先用户是不可能直接操作NV Memory的，所以肯定需要开辟一块RAM区域用于暂存我们的NV data；然后我们的数据需要校验，那么肯定需要有一个空间来存放我们的校验是否正确等必须信息；假如校验出错，我们还需要从某个地方获取该值的默认数据以作为错误处理。所以我们的NVRAM Block就被AutoSAR设计成下面这样了：</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_28.png" class="">
+
+
+
+<ol>
+<li>NVRAM Block分成四个子Block组成，其中NV Blcok、RAM Block和Administrative Block是必须存在的；ROM Block是可选的</li>
+<li>NV Block存储于NV Memory（EEPROM、Flash），可以选择是否添加Header和CRC校验 </li>
+<li>RAM Block就是NV Block在RAM中的一个映射，因为应用层不能直接操作NV（那样太慢了），所以基本上是一个1:1的结构</li>
+<li>ROM Block一般是当出错时读取其中的默认值来取代出错值（ROM只读不能写入）</li>
+<li>Administrative Block用来保存NVRAM Block的一些属性、错误和状态信息，也用来存放datasets的信息（dataset下文会讲到） </li>
+<li>NVRAM Block的这些可选项都由NVRAM block descriptor来配置，工具中可以看到该配置。 </li>
+<li>NVRAM block descriptor还能配置NVRAM Block的几乎所有选项，包括像优先级、类型等选项</li>
+</ol>
+<p><strong>NVRAM Block的类型</strong></p>
+<p>NVRAM Block里一般都只包含1个RAM Block、1个Administrative Block和0/1个ROM Block。但是NV Block可以包含多个，根据包含了几个NV Block，我们将NVRAM Block分为三种类型：Native（正常）、Redundant（冗余）和Dataset（数据集）</p>
+<p> Native： 即一个RAM Block保存到对应的一个NV Block中</p>
+<p>  Redundant： 将一个RAM Block保存到两个NV Block中，当一个数据失效后可以使用另一个</p>
+<p>  Dataset： 最多支持255个NV Block，类似于一个数组，可以用DataIndex来索引其中的数据</p>
+<h3 id="5-Fee-Block"><a href="#5-Fee-Block" class="headerlink" title="5 Fee Block"></a>5 Fee Block</h3><p>Fee Block是在Fee中使用的Block，以一种叫做 “Chunks” 的方式来做管理。一个Chunk可以包含几个Blocks，而Chunk之间是用一种链表的形式连接起来的，Chunk就是其中的节点</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_29.png" class="">
+
+<p>值得注意的是： 假如NVRAM Block的Block Length假如是16，那么Fee Block的Block Size应该要加上CRC长度（CRC16加2，CRC32加4）。所以假如是CRC32，那么Fee Block的Block Size就应该为20。下面的Ea Block也是一样</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_30.png" class="">
+
+<h2 id="七、Diagnostics"><a href="#七、Diagnostics" class="headerlink" title="七、Diagnostics"></a>七、Diagnostics</h2><h3 id="1-UDS协议"><a href="#1-UDS协议" class="headerlink" title="1.UDS协议"></a>1.UDS协议</h3><p>统一的一个通用标准协议；如今各个厂商也可以根据自己的需求，对其进行裁剪和定制。和XCP协议类似，UDS协议是建立在通信协议（例如CAN，目前绝大多数用的CAN，也有部分使用以太网）的上层协议</p>
+<p> 对于诊断上位机和ECU之间是必须具有诊断协议才能完成诊断工作 </p>
+<p> 诊断协议包含了许多的诊断服务，这些服务是真正作用于诊断上位机和ECU之间用来传输的 </p>
+<p> 诊断协议包含了诊断上位机发送给ECU的数据和信息，也包含ECU的应答，是双向协议</p>
+<img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_31.png" class="">
+
+<h3 id="2、CanTP"><a href="#2、CanTP" class="headerlink" title="2、CanTP"></a>2、<strong>CanTP</strong></h3><p>主要作用</p>
+<p>CanTp是位于PduR和CanIf之间的一个模块，主要提供以下服务：</p>
+<ol>
+<li><p>分割发送方向上的数据</p>
+</li>
+<li><p>重组接收方向上的数据 </p>
+</li>
+<li><p>控制数据流</p>
+</li>
+<li><p>检测分割会话中的错误</p>
+</li>
+</ol>
+<p>说白了就是诊断的协议中有时会出现超过8个字节的服务，这个时候就需要使用多个CAN报文去发送这个服务的内容，所以需要CanTP去做分割。同样在接收的时候，也需要做重组</p>
+<h3 id="3、诊断传输流程"><a href="#3、诊断传输流程" class="headerlink" title="3、诊断传输流程"></a>3、诊断传输流程</h3><img src="/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/image_32.png" class="">
+
+<ol>
+<li>DCM首先遵循UDS协议，根据我们上一节讲的规则组成UDS-PDU给到PduR </li>
+<li>PduR敏锐的看出这是CAN报文，所以它选择将UDS-PDU转变为I-PDU给到CanTP</li>
+<li>CanTP看了看这个I-PDU，将其拆分成SF(简单帧Single Frame，如果一个I-PDU不超过8字节，则表示为简单帧)、FF(首帧First Frame)和CF(连续帧Consecutive Frame)</li>
+<li>CanIF再将这些帧发给Can Drv </li>
+<li>Can Drv通过物理总线发送给诊断上位机</li>
+</ol>
+
+        </article>
+
+        
+            
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>weichang wen<br>
+    
+    <strong>Link：</strong><a href="https://wen990806.github.io/2022/01/22/Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89/" title="https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;22&#x2F;Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;22&#x2F;Autosar%EF%BC%88%E4%B8%AD%E7%BA%A7%E7%AF%87%EF%BC%89&#x2F;</a><br>
+
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+        
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/CAN%E5%BC%80%E5%8F%91/">CAN开发</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/2022/" rel="tag">2022</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Autosar/" rel="tag">Autosar</a>
+    
+</div>
+
+    <div class="nexmoe-post-footer">
+        <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src="https://unpkg.com/leancloud-storage/dist/av-min.js"></script>
+<script src='https://unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'r5zxC0st0DDjPA9auXzMV7HY-gzGzoHsz',
+        appKey: '3bqCsovpyfTPHUzTHovd3V3V'
+    })
+</script>
+</section>
+    </div>
+</div>
+
+
+        <div class="nexmoe-post-right">
+          
+            <div class="nexmoe-fixed">
+              <div class="nexmoe-tool">
+                <a href="#" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+  <div id="nexmoe-pendant">
+    <div class="nexmoe-drawer mdui-drawer nexmoe-pd" id="drawer">
+        
+            <div class="nexmoe-pd-item">
+                <div class="clock">
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="needle" id="hours"></div>
+        <div class="needle" id="minutes"></div>
+        <div class="needle" id="seconds"></div>
+        <div class="clock_logo">
+
+        </div>
+
+    </div>
+<style>
+    .clock {
+        background-color: #ffffff;
+        width: 70vw;
+        height: 70vw;
+        max-width: 70vh;
+        max-height: 70vh;
+        border: solid 2.8vw #242424;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1.4vw 2.8vw rgba(0, 0, 0, 0.8);
+        zoom:0.2
+    }
+
+    .memory {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .memory:nth-child(1) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(-520%);
+    }
+
+    .memory:nth-child(2) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(6deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(3) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(12deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(4) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(18deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(5) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(24deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(6) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(30deg) translateY(-520%);
+    }
+
+    .memory:nth-child(7) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(36deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(8) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(42deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(9) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(48deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(10) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(54deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(11) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(60deg) translateY(-520%);
+    }
+
+    .memory:nth-child(12) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(66deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(13) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(72deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(14) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(78deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(15) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(84deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(16) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(90deg) translateY(-520%);
+    }
+
+    .memory:nth-child(17) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(96deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(18) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(102deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(19) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(108deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(20) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(114deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(21) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(120deg) translateY(-520%);
+    }
+
+    .memory:nth-child(22) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(126deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(23) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(132deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(24) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(138deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(25) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(144deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(26) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(150deg) translateY(-520%);
+    }
+
+    .memory:nth-child(27) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(156deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(28) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(162deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(29) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(168deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(30) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(174deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(31) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(180deg) translateY(-520%);
+    }
+
+    .memory:nth-child(32) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(186deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(33) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(192deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(34) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(198deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(35) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(204deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(36) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(210deg) translateY(-520%);
+    }
+
+    .memory:nth-child(37) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(216deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(38) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(222deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(39) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(228deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(40) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(234deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(41) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(240deg) translateY(-520%);
+    }
+
+    .memory:nth-child(42) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(246deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(43) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(252deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(44) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(258deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(45) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(264deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(46) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-520%);
+    }
+
+    .memory:nth-child(47) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(276deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(48) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(282deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(49) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(288deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(50) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(294deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(51) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(300deg) translateY(-520%);
+    }
+
+    .memory:nth-child(52) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(306deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(53) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(312deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(54) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(318deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(55) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(324deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(56) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(330deg) translateY(-520%);
+    }
+
+    .memory:nth-child(57) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(336deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(58) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(342deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(59) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(348deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(60) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(354deg) translateY(-1461%);
+    }
+
+    .needle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .needle#hours {
+        background-color: #1f1f1f;
+        width: 4%;
+        height: 30%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#hours.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#hours:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#minutes {
+        background-color: #1f1f1f;
+        width: 2%;
+        height: 45%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#minutes.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#minutes:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#seconds {
+        background-color: #cb2f2f;
+        width: 1%;
+        height: 50%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#seconds.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#seconds:after {
+        content: '';
+        background-color: #cb2f2f;
+        width: 2.5vw;
+        height: 2.5vw;
+        max-width: 2.5vh;
+        max-height: 2.5vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .clock_logo{
+        width: 10vw;
+        height: 10vw;
+        max-width: 10vh;
+        max-height: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    @media (min-width: 100vh) {
+        .clock {
+            border: solid 2.8vh #242424;
+            box-shadow: 0 1.4vh 2.8vh rgba(0, 0, 0, 0.8);
+        }
+    }
+
+</style>
+
+
+
+
+
+            </div>
+        
+            <div class="nexmoe-pd-item">
+                <div class="qweather" >
+    <div id="he-plugin-standard"></div>
+    <div class="qweather-logo">
+
+    </div>
+
+</div>
+<style>
+    .qweather{
+        position: relative;
+    }
+    .qweather-logo{
+        position: absolute;
+        right: 0;
+        top: -15px;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+<script>
+  WIDGET = {
+    "CONFIG": {
+      "layout": "2",
+      "width": "260",
+      "height": "220",
+      "background": "5",
+      "dataColor": "e67249",
+      "borderRadius": "15",
+      "key": "f74d1e1690e6432d801e97fa2f05a162"
+    }
+  }
+</script>
+<script src="https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"></script>
+
+            </div>
+        
+</div>
+<style>
+    .nexmoe-pd {
+        left: auto;
+        top: 40px;
+        right: 0;
+    }
+    .nexmoe-pd-item{
+       display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+  </div>
+  <script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/10.0.0/highlight.min.js"></script>
+<script src="https://unpkg.com/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/app.js?v=1653562397275"></script>
+
+<script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="/js/clock.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js"></script>
+
+<script src="/lib/codeBlock/codeBlockFuction.js"></script>
+
+<script src="/lib/codeBlock/codeLang.js"></script>
+
+<script src="/lib/codeBlock/codeCopy.js"></script>
+
+<script src="/lib/codeBlock/codeShrink.js"></script>
+
+<link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="/js/webapp.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
+
+<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/250cb4aa.js","daovoice")</script>
+<script>
+  daovoice('init', {
+    app_id: "250cb4aa"
+  });
+  daovoice('update');
+</script>
+

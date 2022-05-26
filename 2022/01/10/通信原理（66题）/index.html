@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+  <title>通信原理（66题） - anchor blog</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+    <!-- Site Verification -->
+    <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
+
+  <link rel="shortcut icon" href="/img/123.jpg" type="image/png" />
+  <meta name="description" content="1 、 简要说明数字通信较之模拟通信的优缺点模拟通信，技术很成熟，就是将模拟信号与载波进行调制， 使其带有一定载波特性，又不失模拟信号的独特性， 接受端通过低通滤波器， 还原初始模拟信号。而数字通信，首先进行采样，对于采样幅值进行编码（ 0 ,1 编码 ），然后进行调制， 相移键控等。 接受端还原即可。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通信原理（66题）">
+<meta property="og:url" content="https://wen990806.github.io/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/index.html">
+<meta property="og:site_name" content="anchor blog">
+<meta property="og:description" content="1 、 简要说明数字通信较之模拟通信的优缺点模拟通信，技术很成熟，就是将模拟信号与载波进行调制， 使其带有一定载波特性，又不失模拟信号的独特性， 接受端通过低通滤波器， 还原初始模拟信号。而数字通信，首先进行采样，对于采样幅值进行编码（ 0 ,1 编码 ），然后进行调制， 相移键控等。 接受端还原即可。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/1.png">
+<meta property="og:image" content="https://wen990806.github.io/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/2.png">
+<meta property="article:published_time" content="2022-01-10T14:00:56.000Z">
+<meta property="article:modified_time" content="2022-05-25T09:52:51.686Z">
+<meta property="article:author" content="weichang wen">
+<meta property="article:tag" content="2022">
+<meta property="article:tag" content="通信原理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wen990806.github.io/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/1.png">
+  <link rel="stylesheet" href="https://unpkg.com/highlight.js@9.15.8/styles/atom-one-dark.css" crossorigin>
+  <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  <link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
+  
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1653562397281">
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(/images/background/duola.jpg)"></div>
+    <div class="nexmoe-small" style="background-image: url(/images/background/chibao.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="weichang wen" class="mdui-btn mdui-btn-icon"><img src="/img/123.jpg" alt="weichang wen"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="weichang wen">
+            <img src="/img/123.jpg" alt="weichang wen" alt="weichang wen">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div class="nexmoe-count-item"><span>Articles</span>18 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>Tags</span>7<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Categories</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archive" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  
+<!-- 站内搜索 -->
+
+<div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search" >
+        <form id="search-form">
+            <label><input type="text" id="local-search-input" name="q" results="0" placeholder="站内搜索" class="input form-control" autocomplete="off" autocorrect="off"/></label>
+            <!-- 清空/重置搜索框 -->
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+        </form>
+    </div>
+    <div id="local-search-result"></div> <!-- 搜索结果区 -->
+    <!-- <p class='no-result'></p> 无匹配时显示，注意在 CSS 中设置默认隐藏 -->
+</div>
+
+
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://www.bilibili.com/" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/CAN开发/">CAN开发</a>
+          <span class="category-list-count">10</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/生活足迹/">生活足迹</a>
+          <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/面试/">面试</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 14px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16px;">can</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 12px;">通信原理</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">18</span></li></ul>
+    </div>
+  </div>
+
+
+<style>
+.nexmoe-widget .archive-list-count{
+	position : absolute;
+	right: 15px;
+	top:9px;
+	color: #DDD;
+}
+</style>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 weichang wen
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/tangyuxian/hexo-theme-tangyuxian" target="_blank">Tangyuxian</a><br/>
+        <a href="http://beian.miit.gov.cn" target="_blank"></a><br/>
+        
+        <div style="font-size: 12px">
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            本站总访问量  <a id="busuanzi_value_site_pv"></a> 次<br />
+            本站访客数<a id="busuanzi_value_site_uv"></a>人次
+        </div>
+        
+        
+    </div>
+
+</div><!-- .nexmoe-drawer -->
+
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: NaN%;">
+            <img data-src="/2022/01/10/通信原理（66题）/66.png" data-sizes="auto" alt="通信原理（66题）" class="lazyload">
+            <h1>通信原理（66题）</h1>
+        </div>
+    
+
+        <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月10日</a>
+    <a><i class="nexmoefont icon-areachart"></i>9.9k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 39 分钟</a>
+</div>
+
+        <div class="nexmoe-post-right">
+            
+        </div>
+
+        <article>
+            <h3 id="1-、-简要说明数字通信较之模拟通信的优缺点"><a href="#1-、-简要说明数字通信较之模拟通信的优缺点" class="headerlink" title="1 、 简要说明数字通信较之模拟通信的优缺点"></a>1 、 简要说明数字通信较之模拟通信的优缺点</h3><p>模拟通信，技术很成熟，就是将模拟信号与载波进行调制， 使其带有一定载波特性，又不失模拟信号的独特性， 接受端通过低通滤波器， 还原初始模拟信号。而数字通信，首先进行采样，对于采样幅值进行编码（ 0 ,1 编码 ），然后进行调制， 相移键控等。 接受端还原即可。</p>
+<span id="more"></span>
+
+<p>区别在于,由 于数字通信其传输数字抽样信号 ，在 接受端可以得到还原， 所以信号传输率高。 而模拟信号， 是对于信号的直接调制,与载波相乘，当 传输途中有干扰时， 对于系统的冲击， 是不可修复的,所以造成失真。相对 而言， 数字通信优于模拟通信。</p>
+<p>与模拟通信相比， 数字通信的优势主要有： 抗干扰能力强， 数字信号可以再生而消除噪声积累； 传输差错可控, 能改善传输质量； 易于使用现代数字信号处理技术对数字信号进行处理； 易于加密，可靠性高； 易于实现各种信息的综台传输。 但数字通信的缺点是： 系统设备复杂， 对同步要求高， 比模拟通信占据更宽的系统频带等。</p>
+<h3 id="2-、-简述消息、信息、信号三个概念之间的联系与区别"><a href="#2-、-简述消息、信息、信号三个概念之间的联系与区别" class="headerlink" title="2 、 简述消息、信息、信号三个概念之间的联系与区别"></a>2 、 简述消息、信息、信号三个概念之间的联系与区别</h3><p>消息是包含具体内容的文字、 符号、 数据、 语音、 图片、 图象等等， 是信息的具体表现形式， 也是特定的信息。 信息是消息的统称， 是消息的概括和抽象， 可理解为消息中包含的有意义的内容， 它用信息量来衡量。 信号是搭载或反映信息的载体， 通常以某种客观物理量（ 电压、 电流） 表现出来。消息、 信息、 信号是与通信密切相关的三个概念。 信息一词在概念上与消息相似， 但其含义却更具普遍性、 抽象性。 消息可以有各种各样的形式， 但消息的内容可统一用信息来表述， 传输信息的多少可直观地使用” 信息量” 进行衡量。 信号是消息的载体和通信的客观对象， 而信息是信号的内涵。</p>
+<img src="/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/1.png" class="">
+
+<h3 id="3-、-简要回答香农公式的在通信系统中的重要意义？-香农信道容量公式："><a href="#3-、-简要回答香农公式的在通信系统中的重要意义？-香农信道容量公式：" class="headerlink" title="3 、 简要回答香农公式的在通信系统中的重要意义？ 香农信道容量公式："></a>3 、 简要回答香农公式的在通信系统中的重要意义？ 香农信道容量公式：</h3><p>香农公式是在一定的信号带宽限制下， 在一定的信噪比之下的数据最大传输速率。 揭示了信道对数据传输率的限制。</p>
+<h3 id="4-、-如何评价模拟通信系统和数字通信系统的有效性和可靠性？"><a href="#4-、-如何评价模拟通信系统和数字通信系统的有效性和可靠性？" class="headerlink" title="4 、 如何评价模拟通信系统和数字通信系统的有效性和可靠性？"></a>4 、 如何评价模拟通信系统和数字通信系统的有效性和可靠性？</h3><blockquote>
+<p>① 有效性： 指传输一定信息量时所占用的信道资源（ 频带宽度和时间间隔） ， 或者说是传输的” 速度” 问题。</p>
+<p>② 可靠性： 指接收信息的准确程度， 也就是传输的” 质量” 问题。</p>
+<p>③ 对于模拟通信系统： 有效性用带宽来衡量， 可靠性用信噪比来衡量。</p>
+<p>④ 对于数字通信系统： 有效性用传输速率或频带利用率来衡量， 可靠性用误码率、 误信率来衡量。模拟通信系统： 已调信号带宽越小， 有效性越好， 解调器输出信噪比越高， 可靠性越好。数字通信系统： 频带利用率越高， 有效性越好， 误码率越小， 可靠性越高。</p>
+</blockquote>
+<h3 id="5-、-什么是误码率，-什么是误信率，-它们之间关系如何？"><a href="#5-、-什么是误码率，-什么是误信率，-它们之间关系如何？" class="headerlink" title="5 、 什么是误码率， 什么是误信率， 它们之间关系如何？"></a>5 、 什么是误码率， 什么是误信率， 它们之间关系如何？</h3><p>所谓误码率， 是指错误接收的码元数在传送总码元数中所占的比例， 或者更确切起的说， 误码率即是码元在传输系统中被传错的概率。 所谓误信率， 又称误比特率， 是指错误接收的信息量在传送信息总量中所占的比例， 或者更确切地说， 它是码元的信息量在传输系统中被丢失的概率。</p>
+<p>二者之间的关系：它们都是用来表示差错率的。二进制系统中误码率与 误信率相等， 但在多进制系统中， 误码率与误倍率一般不相等， 通常误码率大于误信率。</p>
+<h3 id="6-、-何谓严平稳随机过程，-何谓广义平稳随机过程，-它们之间的关系如何？"><a href="#6-、-何谓严平稳随机过程，-何谓广义平稳随机过程，-它们之间的关系如何？" class="headerlink" title="6 、 何谓严平稳随机过程， 何谓广义平稳随机过程， 它们之间的关系如何？"></a>6 、 何谓严平稳随机过程， 何谓广义平稳随机过程， 它们之间的关系如何？</h3><p>若一个随机过程 f(t) 的任意有限维分布函数与时间起点无关 ，则 称该随机过程是在严格意义下的平稳随机过程， 简称严平稳随机过程。</p>
+<p>若一个随机过程 f(t) 的均值与 t 无关， 为常数 a， 自相关函数只与时间间隔有关， 则把同时满足上述两个条件的过程定义为广义平稳随机过程。</p>
+<blockquote>
+<p>严平稳随机过程必定是广义平稳的， 反之不一定成立。</p>
+</blockquote>
+<h3 id="7-、-什么是码元速率？-什么是信息速率？-它们之间的关系如何？"><a href="#7-、-什么是码元速率？-什么是信息速率？-它们之间的关系如何？" class="headerlink" title="7 、 什么是码元速率？ 什么是信息速率？ 它们之间的关系如何？"></a>7 、 什么是码元速率？ 什么是信息速率？ 它们之间的关系如何？</h3><blockquote>
+<p>码元速率 <em>RB</em> 定义为每秒钟传送码元的数目， 单位为” 波特” ， 常用符号</p>
+</blockquote>
+<p>“ B”表示，又称为码元传输速率或传码率。信息速率 <em>Rb</em> 定义为每秒钟传递的信息量， 单位是比特/ 秒（ bit/ s 或 bps） 。</p>
+<blockquote>
+<p>设通信系统传送 N 进制码元， 则码元速率 <em>RB</em> 与信息速率 <em>Rb</em> 之间的关系</p>
+<p>为 <em>Rb</em>= <em>RB</em>log 2N* (<em>bit</em>s*)或 <em>RB</em>= <em>Rb</em>log2 <em>N</em>(<em>B</em>)</p>
+</blockquote>
+<h3 id="8-、-什么叫抽样、-量化和编码？"><a href="#8-、-什么叫抽样、-量化和编码？" class="headerlink" title="8 、 什么叫抽样、 量化和编码？"></a>8 、 什么叫抽样、 量化和编码？</h3><blockquote>
+<p>抽样 ： 将时间上连续的信号处理成时间上离散的信号； 量化： 对时间上离散的信号处理， 使其在幅度上也离散；</p>
+</blockquote>
+<p>编码： 将量化后的信号样值幅度变换成对应的二进制数字信号码组的过程。</p>
+<h3 id="9-、-恒参和随参信道"><a href="#9-、-恒参和随参信道" class="headerlink" title="9 、 恒参和随参信道"></a>9 、 恒参和随参信道</h3><p>① 恒参信道：</p>
+<p>a.  常见类型： 明线， 对称电缆， 同轴电缆， 光纤信道， 无线电视中继， 卫星中继；</p>
+<p>b.  恒参信道对信号的影响： 幅频畸变， 相频畸变；</p>
+<p>c 信道不理想时会导致： 码间干扰； d. 解决方案： 均衡；</p>
+<p>② 随参信道：</p>
+<p>a. 常见类型： 电离层信道， 对流层信道， 移动通信；</p>
+<p> b. 随参信道的特点：信道参数随时间变化， 损耗时变， 时延时变， 多径传播； </p>
+<p>c. 随参信道对信号的影响：瑞利型衰落， 多径传播引起的频率弥散， 频率选择性衰落</p>
+<p>d. 解决方案： 分集；</p>
+<h3 id="10-、-简要回答均匀量化与非均匀量化的特点。"><a href="#10-、-简要回答均匀量化与非均匀量化的特点。" class="headerlink" title="10 、 简要回答均匀量化与非均匀量化的特点。"></a>10 、 简要回答均匀量化与非均匀量化的特点。</h3><p>均匀量化特点， 在量化区内， 大、 小信号的量化间隔相同， 最大量化误差均为半个量化级， 因而小信号时量化信噪比太小， 不能满足要求。</p>
+<p>非均匀量化特点：量化级大小随信号大小而变，信号幅度小时量化级小， 量化误差也小； 信号幅度大时量化级大， 量化误差也大， 因此增大了小信号的量化信噪比。</p>
+<h3 id="11-、-PCM-通信能否完全消除量化误差？-为什么？"><a href="#11-、-PCM-通信能否完全消除量化误差？-为什么？" class="headerlink" title="11 、 PCM 通信能否完全消除量化误差？ 为什么？"></a>11 、 PCM 通信能否完全消除量化误差？ 为什么？</h3><p>量化是用有限个值代替了无限个值， 用量化值和其所代表的样值之差来作为量化噪声， 该噪声只能通过增加量化级数， 即减小量化级长的方法来减弱， 但无法消除。</p>
+<h3 id="12-、-简述数字调制与模拟调制之间的异同点？-多进制调制与二进制调制相比具有什么特点？"><a href="#12-、-简述数字调制与模拟调制之间的异同点？-多进制调制与二进制调制相比具有什么特点？" class="headerlink" title="12 、 简述数字调制与模拟调制之间的异同点？ 多进制调制与二进制调制相比具有什么特点？"></a>12 、 简述数字调制与模拟调制之间的异同点？ 多进制调制与二进制调制相比具有什么特点？</h3><p>数字调制与模拟调制就调制原理而言完全一样， 因为数字信号可以看作是模拟信号的特殊情况； 然而由于数字信号具有开关特性， 因此数字信号的调制可以利用其开关特性来实现， 即键控方式， 这样可以使调制实现起来简单。</p>
+<p>多进制调制相比二进制调制在信息速率相同的情况下， 可以获得较高的频谱利用率， 进制数越高， 频谱利用率也就越高； 但抗干扰能力则较二进制有所下降， 且进制数越高， 抗干扰能力越差。</p>
+<h3 id="13-、-什么是复用方式？-它有哪几种类型？-各有何含义"><a href="#13-、-什么是复用方式？-它有哪几种类型？-各有何含义" class="headerlink" title="13 、 什么是复用方式？ 它有哪几种类型？ 各有何含义"></a>13 、 什么是复用方式？ 它有哪几种类型？ 各有何含义</h3><p>实现在同一条通信线路上传送多路信号的技术叫做多路复用技术。 各种多路复用技术的目的均在如何尽量提高信道的利用率。 目前常用的复用方式主要有频分复用、时分复用、码分复用和空分复用。频分复用(FDM) 是指根据工作频率来区分用户， 各路信号的频谱处于不同频段的物理信道上， 互不重叠。时分复用(TDM) 是指根据工作时隙来区分用户，它将整个信道传输信息的时间划分成若干时隙， 并将这些时隙分配给每一个用户使用， 每一路信号在分配给自己的时隙内独占信道进行数据传输。 码分复用(CDM) 是指根据码型来区分用户， 系统为每个用户分配各自特定的地址码， 地址码之间具有相互准正交性， 所有子信道在时间、 空间和频率上则可以重叠。 空分复用(SDM)</p>
+<p>是指多对电线或光纤共用一条缆的空间复用方式。</p>
+<h3 id="14-、-均衡和分集"><a href="#14-、-均衡和分集" class="headerlink" title="14 、 均衡和分集"></a>14 、 均衡和分集</h3><p>① 均衡：</p>
+<p>在基带系统中传入一种可调滤波器就可以补偿整个系统的幅频和相频特 征， 从而减小码间干扰的影响。 这个对系统校正的过程称为均衡， 实现均衡的滤波器称为均衡器。</p>
+<p>均衡分为频域均衡和时域均衡。 频域均衡是从频率响应考虑， 使包括均衡器在内的整个系统的总传输函数满足无失真传输条件。 而时域均衡， 则是直接从时间响应考虑， 使包括均衡器在内的整个系统的冲激响应满足无码间串扰条件。</p>
+<p>频域均衡在信道特性不变， 且传输低速率数据时是适用的， 而时域均衡可以根据信道特性的变化进行调整， 能够有效地减小码间串扰， 故在高速数据传输中得以广泛应用。</p>
+<p>② 分集：</p>
+<p>分集类型： 时间分集， 空间分集， 角度分集， 极化分集， 频率分集等。在接收端的合并技术有： 选择方式； 最大比合并方式； 等增益合并方式等。</p>
+<h3 id="15-、-什么是多径效应？"><a href="#15-、-什么是多径效应？" class="headerlink" title="15 、 什么是多径效应？"></a>15 、 什么是多径效应？</h3><p>在随参信道当中进行信号的传输过程中， 由于多径传播的影响， 会使信号的包络产生起伏， 即衰落； 会使信号由单一频率变成窄带信号， 即频率弥散现象； 还会使信号的某些频率成分消失， 即频率选择性衰落。 这种由于多径传播对信号的影响称为多径效应。</p>
+<h3 id="16-、-什么是调制？-调制在通信系统中的作用是什么？"><a href="#16-、-什么是调制？-调制在通信系统中的作用是什么？" class="headerlink" title="16 、 什么是调制？ 调制在通信系统中的作用是什么？"></a>16 、 什么是调制？ 调制在通信系统中的作用是什么？</h3><p>所谓调制， 是指按调制信号的变化规律去控制高频载波的某个参数的过程。作用是：将基带信号变换成适合在信道中传输的已调信号； 实现信道的多路复用； 改善系统抗噪声性能。</p>
+<h3 id="17-、-什么是奈奎斯特准则？-什么是奈奎斯特速率？"><a href="#17-、-什么是奈奎斯特准则？-什么是奈奎斯特速率？" class="headerlink" title="17 、 什么是奈奎斯特准则？ 什么是奈奎斯特速率？"></a>17 、 什么是奈奎斯特准则？ 什么是奈奎斯特速率？</h3><p>为了得到无码间串扰的传输特性， 系统传输函数不必须为矩形， 而容许具有缓慢下降边沿的任何形状， 只要此传输函数是实函数并且在 f=W 处奇对称， 称为奈奎斯特准则。 同时， 抽样速率 fs 应不小于 2fh， 这一最低抽样频率 2fh 称为奈奎斯特速率。</p>
+<h3 id="18-、-为什么绝大多数无线信道对信号的影响要比有线信道大？-在无线通信系统中，-主要采用什么技术解决这种影响？"><a href="#18-、-为什么绝大多数无线信道对信号的影响要比有线信道大？-在无线通信系统中，-主要采用什么技术解决这种影响？" class="headerlink" title="18 、 为什么绝大多数无线信道对信号的影响要比有线信道大？ 在无线通信系统中， 主要采用什么技术解决这种影响？"></a>18 、 为什么绝大多数无线信道对信号的影响要比有线信道大？ 在无线通信系统中， 主要采用什么技术解决这种影响？</h3><blockquote>
+<p>① 大多数无线信道都属于随参信道，随参信道的特点：信道参数随时间变化， 损耗时变， 时延时变， 多径传播；</p>
+<p>② 随参信道对信号的影响： 瑞利型衰落， 多径传播引起的频率弥散，频率选择性衰落；</p>
+</blockquote>
+<blockquote>
+<p>③ 在无线通信系统中多采用分集技术。</p>
+</blockquote>
+<h3 id="19-、-简述眼图的产生过程？-眼图的作用？-眼图中衡量传输质量的指标？-（-至少写出三个）"><a href="#19-、-简述眼图的产生过程？-眼图的作用？-眼图中衡量传输质量的指标？-（-至少写出三个）" class="headerlink" title="19 、 简述眼图的产生过程？ 眼图的作用？ 眼图中衡量传输质量的指标？ （ 至少写出三个）"></a>19 、 简述眼图的产生过程？ 眼图的作用？ 眼图中衡量传输质量的指标？ （ 至少写出三个）</h3><blockquote>
+<p>① 眼图产生：信号加在示波器的垂直输入端上，示波器水平扫描周期与码元同步的周期同步。 在示波器上就可以观测到眼图。</p>
+<p>② 眼图作用： 定性观测码间干扰和噪声对系统的影响。</p>
+<p>③ 衡量传输质量的指标（ 眼图参数）： 最佳判决门限， 最佳抽样时刻， 噪声容限， 定时误差灵敏度等。</p>
+</blockquote>
+<h3 id="20-、比较预加重去加重技术和压扩技术的异同？-FM-调制系统采用的是何种技术？-为什么？-PSTN-中采用的是何种技术？-为什么？"><a href="#20-、比较预加重去加重技术和压扩技术的异同？-FM-调制系统采用的是何种技术？-为什么？-PSTN-中采用的是何种技术？-为什么？" class="headerlink" title="20 、比较预加重去加重技术和压扩技术的异同？ FM 调制系统采用的是何种技术？ 为什么？ PSTN 中采用的是何种技术？ 为什么？"></a>20 、比较预加重去加重技术和压扩技术的异同？ FM 调制系统采用的是何种技术？ 为什么？ PSTN 中采用的是何种技术？ 为什么？</h3><blockquote>
+<p>① 预加重去加重技术和压扩技术相同点 ：改 善系统信噪比 ，提 高通信质量。</p>
+<p>② 预加重去加重技术和压扩技术区别 ：a. 预加重去加重技术改善高频信号的信噪比。 b. 压扩技术改善小信号信噪比。</p>
+<p>③ FM 调制系统中采用预加重去加重技术，原因是 FM 调制系统，解调器输出端的噪声呈平方率分布，高频分量受到的噪声影响大，低频分量受到的噪声影响小， 预加重去加重技术的目的就是为了提升高频信号的信噪比。</p>
+<p>④ PSTN 系统中的 PCM 编码时采用的是压扩技术。 使用压扩技术的原因是信号幅度的概率分布不均匀，所以采用压扩技术进行非均匀量化，PCM 中压扩技术目的是为了提升小信号的信噪比。</p>
+</blockquote>
+<h3 id="21-、-多进制数字调制系统和二进制数字调制系统的比较。"><a href="#21-、-多进制数字调制系统和二进制数字调制系统的比较。" class="headerlink" title="21 、 多进制数字调制系统和二进制数字调制系统的比较。"></a>21 、 多进制数字调制系统和二进制数字调制系统的比较。</h3><blockquote>
+<p>与二进制数字调制系统比较， 多进制调制系统具有以下两个特点：① 在相同的码元传输速率下，多进制系统的信息传输速率显然要比二进制系统的高。</p>
+<p>② 在相同的信息传输速率下，由于多进制码元传输速率比二进制的低，因而多进制信号的码元的持续时间要比二进制的长， 相应的带宽就窄。</p>
+</blockquote>
+<h3 id="22-、-用香农公式来解释调频方式与调幅方式性能上的优劣关系。"><a href="#22-、-用香农公式来解释调频方式与调幅方式性能上的优劣关系。" class="headerlink" title="22 、 用香农公式来解释调频方式与调幅方式性能上的优劣关系。"></a>22 、 用香农公式来解释调频方式与调幅方式性能上的优劣关系。</h3><p>香农公式表示在信道容量一定的情况下，信道带宽越宽（ 有效性下降）， 则要求信道提供的信噪比可以越小（ 可靠性提高）， 即可以提高抗干扰能力。对于调幅方式， 其占用的频带要比调频方式占用的频带小， 而抗干扰能力则要比调频方式的差， 这正好符合香农公式所反映的两者间关系</p>
+<h3 id="23-、-抽样后为什么要加保持电路？"><a href="#23-、-抽样后为什么要加保持电路？" class="headerlink" title="23 、 抽样后为什么要加保持电路？"></a>23 、 抽样后为什么要加保持电路？</h3><p>抽样后为防止相邻话路样值在公共通道上挨得太近会导致串音以及样值 脉冲顶部不平坦导致不能选取量化标准 。抽 样脉冲的宽度通常取得很小, 一般远小于一个时隙的宽度, 即 n 位码宽, 所以在抽样后编码前加保持电路, 将样值脉宽展宽为一个时隙宽度。</p>
+<h3 id="24-、-什么是信源编码？-什么是信道编码？-各自在通信系统中的作用？-并列举几种常见的信源编码和信道编码？"><a href="#24-、-什么是信源编码？-什么是信道编码？-各自在通信系统中的作用？-并列举几种常见的信源编码和信道编码？" class="headerlink" title="24 、 什么是信源编码？ 什么是信道编码？ 各自在通信系统中的作用？ 并列举几种常见的信源编码和信道编码？"></a>24 、 什么是信源编码？ 什么是信道编码？ 各自在通信系统中的作用？ 并列举几种常见的信源编码和信道编码？</h3><p>① 信源编码是为了减少信源输出符号序列中的冗余度、 提高符号的平均信息量而进行的编码。 信道编码是通过增加冗余比特从而实现差错控制而进行的编码。</p>
+<p>② 信源编码是为了提高通信系统的有效性。 信道编码是为了提高通信系统的可靠性。</p>
+<p>③ 信源编码是完成 A/ D 转换。 信道编码是将信源编码器输出的机内码转换成适合于在信道上传输的线路码， 完成码型变换。</p>
+<p>常见信源编码： PCM， DPCM, DM, 霍夫曼编码等。常见信道编码： 线性分组码， 循环码， 卷积码， CRC， BHC。</p>
+<h3 id="25-、-简述为什么实际的数字调相不能采用绝对调相而采用相对调相？"><a href="#25-、-简述为什么实际的数字调相不能采用绝对调相而采用相对调相？" class="headerlink" title="25 、 简述为什么实际的数字调相不能采用绝对调相而采用相对调相？"></a>25 、 简述为什么实际的数字调相不能采用绝对调相而采用相对调相？</h3><p>数字调相系统多采用直接法载波同步方式 ，因 此存在载波相位模糊现象。对于绝对调相的基带码元与载波相位间关系是固定的， 因此载波相位模糊使得解调出的基带信号出现不确定， 从而无法实现正常传输； 而相对调相是利用载波相位的变化来表示基带码元， 因此载波相位模糊不会影响载波相位的变化， 故对相对调相解调出的基带信号不会产生影响。</p>
+<h3 id="26-、-简述基带系统中选择线路码型的要求？"><a href="#26-、-简述基带系统中选择线路码型的要求？" class="headerlink" title="26 、 简述基带系统中选择线路码型的要求？"></a>26 、 简述基带系统中选择线路码型的要求？</h3><blockquote>
+<p>基带系统中选择线路码型， 应具有如下特点：</p>
+<p>① 无直流分量， 低频分量尽量少；</p>
+<p>② 码型统计频谱越窄越好；</p>
+<p>③ 便于从信号中提取定时信息；</p>
+<p>④ 尽量提高传输码的传输效率；</p>
+<p>⑤ 适用于信源的统计变化；</p>
+<p>⑥ 编译码设备尽可能简单；</p>
+</blockquote>
+<h3 id="27-、-什么是部分响应波形，-什么是部分响应系统"><a href="#27-、-什么是部分响应波形，-什么是部分响应系统" class="headerlink" title="27 、 什么是部分响应波形， 什么是部分响应系统"></a>27 、 什么是部分响应波形， 什么是部分响应系统</h3><p>有控制的在某些码元的抽样时刻引入码间干扰，而在其余码元的抽样时 刻无码间干扰， 那么就能使频带利用率提高到理论上的最大值， 同时又可以降低对定时精度的要求， 通常把这种波形称为部分响应波形。 利用部分响应波形进行的基带传输系统称为部分响应系统。</p>
+<h3 id="28-、-增量调制中会产生哪两种噪声，分别是怎样形成的，如何改善？"><a href="#28-、-增量调制中会产生哪两种噪声，分别是怎样形成的，如何改善？" class="headerlink" title="28 、 增量调制中会产生哪两种噪声，分别是怎样形成的，如何改善？"></a>28 、 增量调制中会产生哪两种噪声，分别是怎样形成的，如何改善？</h3><p>调制会产生两种噪声： 一般噪声和过载量化噪声， 前者是有在量化时抽样值与量化电平的误差产生的， 后者是由于台阶信号的变化速度赶不上模拟信号的变化速度造成的； 要改善前者可通过减小量化台阶， 改善后者可通过增大采样频率来实现。</p>
+<h3 id="29-、什么是”-倒π-现象”？-为什么二进制移相键控信号会出现”-倒π-现象”？-怎么解决？"><a href="#29-、什么是”-倒π-现象”？-为什么二进制移相键控信号会出现”-倒π-现象”？-怎么解决？" class="headerlink" title="29 、什么是” 倒π 现象”？ 为什么二进制移相键控信号会出现” 倒π 现象”？ 怎么解决？"></a>29 、什么是” 倒π 现象”？ 为什么二进制移相键控信号会出现” 倒π 现象”？ 怎么解决？</h3><p>① 在数字调制系统中， 如果采用绝对移相方式， 由于发送端是以某一个相位作为基准的， 因而在接收端系统中也必须有这样一个固定基准相位作参考。 如果这个参考相位发生变化（ 0 相位变π相位或π相位变 0 相位） ， 则恢复的数字信息就会发生 0 变为 1 或 1 变为 0 ， 从而造成错误的恢复。 而实际通信时，参考基准相位的随机跳变是可能的，而且在通信过程中不易被发觉， 就会在接受端发生错误的恢复， 这种现象就称为” 倒π现象” 。</p>
+<blockquote>
+<p>② 因为二进制移相键控信号采用是绝对移相方式 ，所 以就可能出 现” 倒π现象” 。</p>
+</blockquote>
+<blockquote>
+<p>③ 解决方案就是采用相对相移方式， 即 2DPSK 调制方式。</p>
+</blockquote>
+<h3 id="30-、-构成-AMI-码和-HDB-3-码的规则是什么？-它们各有什么优缺点？"><a href="#30-、-构成-AMI-码和-HDB-3-码的规则是什么？-它们各有什么优缺点？" class="headerlink" title="30 、 构成 AMI 码和 HDB 3 码的规则是什么？ 它们各有什么优缺点？"></a>30 、 构成 AMI 码和 HDB 3 码的规则是什么？ 它们各有什么优缺点？</h3><p>AMI 码是把 1 码变换为交替的正一负一， 0 码保持不变。 AMI 码的优点是无直流分量。 编译码电路简单， 具有内在的检错能力。 缺点是长连零导致定时信号难以提取。 HDB 3 码是改进式的 AMI 码， 1 码还是变换为交替的正一负一， 当出现 4 个或 4 个以上的 0 码时， 第四个 0 变换为与前一个非零符号用相同的极性的破坏符号， 用 V 表示。 但相邻 V 码的极性必须交替出现， 以确保编好的码中无直流分量。 若 V 码与前一个非零码的极性不同， 则将第一个四连 0 的第一个 0 更改为与 V 码相同极性的 B 码 。HD B 3 码保持了 AMI 码的优点外， 还减少了连零串的出现， 有利于定时信号的提取。</p>
+<h3 id="31-、-什么是移频键控？-2FSK-信号的波形有什么特点。"><a href="#31-、-什么是移频键控？-2FSK-信号的波形有什么特点。" class="headerlink" title="31 、 什么是移频键控？ 2FSK 信号的波形有什么特点。"></a>31 、 什么是移频键控？ 2FSK 信号的波形有什么特点。</h3><p>又称数字频率控制， 是数字通信中使用较早的一种调制方式， 基本原理是利用载波的频率变化来传递数字信息。2FSK 是用数字基带信号控制载波的频率变化，0 符号对应于载频ω 1 ，1 符号对应于载频ω 2 ， 而且ω 1 和ω 2 之间的改变是瞬间完成的。</p>
+<h3 id="32-、-简述带通型信号的抽样不易采用低通型抽样定理进行抽样的原因？"><a href="#32-、-简述带通型信号的抽样不易采用低通型抽样定理进行抽样的原因？" class="headerlink" title="32 、 简述带通型信号的抽样不易采用低通型抽样定理进行抽样的原因？"></a>32 、 简述带通型信号的抽样不易采用低通型抽样定理进行抽样的原因？</h3><p>带通型信号是指信号的带宽B&lt;l 的信号， 该信号若采用低通型抽样定</p>
+<p>理进行抽样可以符合抽样要求，但将带来频谱利用不合理， 抽样速率较高的现象， 因此应采用带通型抽样定理进行抽样可以降低抽样速率。</p>
+<h3 id="33-、-在通信原理中采用差错控制的目的是什么？"><a href="#33-、-在通信原理中采用差错控制的目的是什么？" class="headerlink" title="33 、 在通信原理中采用差错控制的目的是什么？"></a>33 、 在通信原理中采用差错控制的目的是什么？</h3><p>由于数字信号在传输过程中受到加性干扰的影响 ，使 信号码元波形变坏， 故传输到接收端后可能发生错误判决。 因此需要差错控制来解决加性干扰的影响。</p>
+<h3 id="34-、PCM-通信中发端抽样后和收端分路后各有一个-3-4-KHZ-的低通波波器，-这两者作用各有什么不同？"><a href="#34-、PCM-通信中发端抽样后和收端分路后各有一个-3-4-KHZ-的低通波波器，-这两者作用各有什么不同？" class="headerlink" title="34 、PCM 通信中发端抽样后和收端分路后各有一个 3. 4 KHZ 的低通波波器， 这两者作用各有什么不同？"></a>34 、PCM 通信中发端抽样后和收端分路后各有一个 3. 4 KHZ 的低通波波器， 这两者作用各有什么不同？</h3><p>发端滤波器的作用是： 限制输入信号的最高频率， 以免抽样电路对该信号抽样时不满足抽样定理而产生折迭噪声， 收端滤波器的作用是： 从 PAM 信号中检出包络线， 即取出原始信号的波形（ 低频分量） ， 实现原始模拟信号的还原。</p>
+<h3 id="35-、-一个-采用-非-相干-解-调方-式的-数-字通-信-系统-是否-必-须有-载-波同-步和-位-同步？-其同步性能的好坏对通信系统的性能有何影响？"><a href="#35-、-一个-采用-非-相干-解-调方-式的-数-字通-信-系统-是否-必-须有-载-波同-步和-位-同步？-其同步性能的好坏对通信系统的性能有何影响？" class="headerlink" title="35 、 一个 采用 非 相干 解 调方 式的 数 字通 信 系统 是否 必 须有 载 波同 步和 位 同步？ 其同步性能的好坏对通信系统的性能有何影响？"></a>35 、 一个 采用 非 相干 解 调方 式的 数 字通 信 系统 是否 必 须有 载 波同 步和 位 同步？ 其同步性能的好坏对通信系统的性能有何影响？</h3><blockquote>
+<p>采用非相干解调方式的数字通信系统可以不需要载波同步， 但必须有位同步。 位同步的性能好坏将直接影响到抽样判决的结果， 最终影响系统的误码率的大小。</p>
+</blockquote>
+<h3 id="36-、-说明码率、-码重何码距的概念"><a href="#36-、-说明码率、-码重何码距的概念" class="headerlink" title="36 、 说明码率、 码重何码距的概念"></a>36 、 说明码率、 码重何码距的概念</h3><p>码率就是数据传输时单位时间传送的数据位数， 一般我们用的单位是kbps。码重 W 就是码字中所含码元” 1 “的数目. 两个码组对应位上数字的不同位的个数称为码组的距离， 简称码距， 又称海明（ Hamming） 距离。</p>
+<h3 id="37-、-未来通信技术的发展趋势如何？"><a href="#37-、-未来通信技术的发展趋势如何？" class="headerlink" title="37 、 未来通信技术的发展趋势如何？"></a>37 、 未来通信技术的发展趋势如何？</h3><blockquote>
+<p>未来通信技术主要以数字通信为发展方向。 随着光纤通信的不断发展，</p>
+</blockquote>
+<p>有线通信将以光纤通信为发展方向， 当前主要研究单模长波长光纤通信、 大容量数宇传输技术和相干光通信。 卫星通信集中体现在调制／ 解调、 纠错编码／ 译码、 数字信号处理、 通信专用超大规模集成电路、 固态功放和低噪声接收、 小口径低旁瓣天线等多项新技术的发展。 移动通信的发展方向是数字化、 微型化和标准化。</p>
+<h3 id="38-、-简述无码间干扰条件的含义？"><a href="#38-、-简述无码间干扰条件的含义？" class="headerlink" title="38 、 简述无码间干扰条件的含义？"></a>38 、 简述无码间干扰条件的含义？</h3><p>把从波形形成输入到接收滤波器输出的传递函数 H( ω ) 的幅频特性在ω 轴上以 2 π /Ts 为间隔切开， 然后分段沿ω 轴平移到(- π /Ts， π /Ts) 区内将它们叠加起来， 其结果应当为一固定值 Ts， 即叠加后的结果为理想低通特性就可以做到在抽样点上无码间干扰。</p>
+<h3 id="39-、-试说明数字相位调制可以采用数字调幅的方式来实现的道理？-数字相位调制的数学表示为"><a href="#39-、-试说明数字相位调制可以采用数字调幅的方式来实现的道理？-数字相位调制的数学表示为" class="headerlink" title="39 、 试说明数字相位调制可以采用数字调幅的方式来实现的道理？ 数字相位调制的数学表示为"></a>39 、 试说明数字相位调制可以采用数字调幅的方式来实现的道理？ 数字相位调制的数学表示为</h3><img src="/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/2.png" class="">
+
+<p>显然 、 由调制信号确定， 由此可见原来载波相位受调制信号控制的调</p>
+<p>相变成了幅度受调制信号控制的正交调幅。 即数字调相可以用正交调幅来实现。</p>
+<h3 id="40-、-什么是窄高斯噪声？-他在波形上有什么特点？-它的包络和相位各服从什么概率分布？"><a href="#40-、-什么是窄高斯噪声？-他在波形上有什么特点？-它的包络和相位各服从什么概率分布？" class="headerlink" title="40 、 什么是窄高斯噪声？ 他在波形上有什么特点？ 它的包络和相位各服从什么概率分布？"></a>40 、 什么是窄高斯噪声？ 他在波形上有什么特点？ 它的包络和相位各服从什么概率分布？</h3><p>窄带高斯噪声： 若一个高斯噪声满足窄带条件， 即其带宽远远小于中心频率， 而且中心频率偏离零频很远， 则称之为窄带高斯噪声。 其波形上的特点是包络和相位都像一个缓慢变化的正弦波。 其包络的一维分布服从瑞利分布， 其相位的一维分布服从均匀分布。</p>
+<h3 id="41-、-单工，-半双工及全双工通信方式是按什么标准分类的？"><a href="#41-、-单工，-半双工及全双工通信方式是按什么标准分类的？" class="headerlink" title="41 、 单工， 半双工及全双工通信方式是按什么标准分类的？"></a>41 、 单工， 半双工及全双工通信方式是按什么标准分类的？</h3><p>按照消息传递的方向与时间关系分类。 单工通信是指消息只能单向传输的工作方式， 通信双方只有一个进行发送， 另一个只能接受， 如广播， 无线寻呼等。 半双工通信指通信双方都能进行收发信息， 但是不能同时进行收发的工作方式， 如对讲机。 全双工通信是指通信双方能同时进行收发消息的工作方式， 如电话等。</p>
+<h3 id="42-、-什么是快衰落，-什是慢衰落？"><a href="#42-、-什么是快衰落，-什是慢衰落？" class="headerlink" title="42 、 什么是快衰落， 什是慢衰落？"></a>42 、 什么是快衰落， 什是慢衰落？</h3><p>由多径效应引起的衰落称为快衰落； 由信号路径上由于季节， 日夜， 天气等变化引起的信号衰落称为慢衰落。</p>
+<h3 id="43-、-无码间串扰时，-基带传输系统的误码率与哪些因素有关？-如何降低系统的误码率？"><a href="#43-、-无码间串扰时，-基带传输系统的误码率与哪些因素有关？-如何降低系统的误码率？" class="headerlink" title="43 、 无码间串扰时， 基带传输系统的误码率与哪些因素有关？ 如何降低系统的误码率？"></a>43 、 无码间串扰时， 基带传输系统的误码率与哪些因素有关？ 如何降低系统的误码率？</h3><p>无码间串扰时， 基带传输系统的误码率与抽样判决时的信噪比有关。 要降低系统的误码率需要提高抽样判决时的信噪比， 可以降低信道噪声或者提高信号平均功率。</p>
+<h3 id="44-、-什么是码间串扰，-怎样产生的，-对通信质量有什么影响"><a href="#44-、-什么是码间串扰，-怎样产生的，-对通信质量有什么影响" class="headerlink" title="44 、 什么是码间串扰， 怎样产生的， 对通信质量有什么影响"></a>44 、 什么是码间串扰， 怎样产生的， 对通信质量有什么影响</h3><p>码间串扰是由于系统传输总特性不理想， 导致前后码元的波形畸变、 展宽， 并使前面波形出现很长的拖尾， 漫延到当前码元的抽样时刻上， 从而对当前码元的判决造成干扰。 码间串扰严重时， 会造成错误判决。</p>
+<h3 id="45-、-为什么要抑制载波？"><a href="#45-、-为什么要抑制载波？" class="headerlink" title="45 、 为什么要抑制载波？"></a>45 、 为什么要抑制载波？</h3><p>在 AM 信号中， 载波分量并不携带信息， 仍占据大部分功率。如果抑制载波分量的传送， 就能够提高功率效率， 这就抑制载波双边带调制。</p>
+<h3 id="46-、-数字调制方式各自的优缺点："><a href="#46-、-数字调制方式各自的优缺点：" class="headerlink" title="46 、 数字调制方式各自的优缺点："></a>46 、 数字调制方式各自的优缺点：</h3><p>数字调制有： 幅移键控 ask （ 特点： 设备简单， 频带利用率高， 抗噪声性能差） ， 频移键控 fsk （ 抗干扰能力强， 占用频带较宽） ， 相移键控 psk（ 效率高） 。</p>
+<h3 id="47-、-DSB-调制系统和-SSB-调制系统的抗噪声性能是否相同，-为什么"><a href="#47-、-DSB-调制系统和-SSB-调制系统的抗噪声性能是否相同，-为什么" class="headerlink" title="47 、 DSB 调制系统和 SSB 调制系统的抗噪声性能是否相同， 为什么"></a>47 、 DSB 调制系统和 SSB 调制系统的抗噪声性能是否相同， 为什么</h3><p>相同。 如果解调器的输入噪声功率密度相同， 输入信号功率也相同， 则单边带和双边带在解调器输出的信噪比是相等的。</p>
+<h3 id="48-、-数字调制的基本方式有哪些？-其时间波形上各有什么特点？"><a href="#48-、-数字调制的基本方式有哪些？-其时间波形上各有什么特点？" class="headerlink" title="48 、 数字调制的基本方式有哪些？ 其时间波形上各有什么特点？"></a>48 、 数字调制的基本方式有哪些？ 其时间波形上各有什么特点？</h3><p>数字调制技术有两种方法： 一是利用模拟调制方法去实现数字式调制， 即把数字调制看成是模拟调制的一个特例， 把数字基带信号当成模拟信号的特殊情况处理。 二是利用数字信号的离散取值的特点通过开关键控载波， 从而实现数字调制， 这种调制方式通常有幅度键控、 频率键控和相位键控。 其时间波形上来说， 有可能是不连续的。</p>
+<h3 id="49-、-数字基带信号有哪些常见的形式？-各有什么特点？-它们的时域表达式如何？"><a href="#49-、-数字基带信号有哪些常见的形式？-各有什么特点？-它们的时域表达式如何？" class="headerlink" title="49 、 数字基带信号有哪些常见的形式？ 各有什么特点？ 它们的时域表达式如何？"></a>49 、 数字基带信号有哪些常见的形式？ 各有什么特点？ 它们的时域表达式如何？</h3><p>数字基带信号的常见形式有： 单极性波形， 双极性波形， 单极性归零波形， 双极性归零波形， 差分波形和多电平波形。</p>
+<p>单极性波形用正电平和零电平分别对应二进制码” 1 “ 和” 0 “ ， 其波形特点是电脉冲之间无间隔，极性单一， 易用于 TTL, CMOS 电路， 缺点是有直流分量， 只使用于近距离传输。</p>
+<p>双极性波形用正负电平的脉冲表示二进制 1 和 0 ， 其波形特点是正负电平幅度相等， 极性相反， 故 1 和 0 等概率出现时无直流分量， 有利于在信道中传输， 并且在接收端恢复信号的判决电平为零， 不受信道特性变化影响， 抗干扰能力强。</p>
+<p>单极性归零波形电脉冲宽度小于码元宽度， 信号电压在一个码元终止时刻前总要回到零电平。 从单极性归零波形中可以直接提取定时信息。</p>
+<p>双极性归零波形兼有双极性和归零波形的特点。 相邻脉冲之间存在零电位间隔， 接收端易识别码元起止时刻， 从而使收发双方保持正确的位同步。差分波形用相邻码元的电平跳变来表示消息代码， 而与码元本身的电位或极性无关。 用差分波形传送代码可以消除设备初始状态的影响， 特别是在相位调制系统中可以解决载波相位模糊的问题。</p>
+<p>多电平波形的一个脉冲对应多个二进制码， 在波特率相同的情况下， 可以提高信息传输速率。</p>
+<h3 id="50-、-什么是门限效应？-AM-包络检波法为什么会产生门限效应？"><a href="#50-、-什么是门限效应？-AM-包络检波法为什么会产生门限效应？" class="headerlink" title="50 、 什么是门限效应？ AM 包络检波法为什么会产生门限效应？"></a>50 、 什么是门限效应？ AM 包络检波法为什么会产生门限效应？</h3><p>小信噪比时， 解调输出信号无法与噪声分开， 有用信号” 淹没” 在噪声之中， 这时候输出信噪比不是按比例地随输入信噪比下降， 而是急剧恶化， 这种现象称为门限效应。由于包络检波法的非线性作用，所以 AM 信号会产生门限效应。</p>
+<h3 id="51-、-什-么是-频域-均-衡？-什-么是-时域-均-衡？-横-向滤-波器-为-什么-能-实现-时域-均衡？"><a href="#51-、-什-么是-频域-均-衡？-什-么是-时域-均-衡？-横-向滤-波器-为-什么-能-实现-时域-均衡？" class="headerlink" title="51 、 什 么是 频域 均 衡？ 什 么是 时域 均 衡？ 横 向滤 波器 为 什么 能 实现 时域 均衡？"></a>51 、 什 么是 频域 均 衡？ 什 么是 时域 均 衡？ 横 向滤 波器 为 什么 能 实现 时域 均衡？</h3><blockquote>
+<p>频域均衡： 利用可调滤波器的频率特性补偿基带系统的频率特性， 使得包括可调滤波器在内的基带系统总的传输特性满足无码间串扰传输的要求。 起频率特性补偿作用的可调滤波器叫频域均衡器。</p>
+<p>时域均衡器： 在接受滤波器后插入一个称为横向滤波器的可调滤波器， 这个横向滤波器可以将输入端在抽样时刻上有码间干扰的响应波形变换为在 抽样上无码间干扰的响应波形。 由于横向滤波器的均衡原理是在时域响应波形上的， 所以称这种均衡为时域均衡。</p>
+<p>横向滤波器可以将输入端在抽样时刻上有码间干扰的响应波形变换成在 抽样时刻上无码间干扰的响应波形， 所以横向滤波器可以实现时域均衡。d</p>
+</blockquote>
+<h3 id="52-、-VSB-滤波器的传输特性应满足什么条件？-为什么？"><a href="#52-、-VSB-滤波器的传输特性应满足什么条件？-为什么？" class="headerlink" title="52 、 VSB 滤波器的传输特性应满足什么条件？ 为什么？"></a>52 、 VSB 滤波器的传输特性应满足什么条件？ 为什么？</h3><p>残留边带滤波器的特性 H（ w） 在正负 Wc 处必须具有互补对称性， 相干解调时才能无失真的从残留边带中恢复所需要的调制信号。</p>
+<h3 id="53-、-试对-AM-和-DSB-可否采用包络检波方式进行解调进行讨论？"><a href="#53-、-试对-AM-和-DSB-可否采用包络检波方式进行解调进行讨论？" class="headerlink" title="53 、 试对 AM 和 DSB 可否采用包络检波方式进行解调进行讨论？"></a>53 、 试对 AM 和 DSB 可否采用包络检波方式进行解调进行讨论？</h3><p>AM 已调信号波形的包络即为调制信号， 采用包络检波的方式获得 AM 的包络线即恢复出原始信号；</p>
+<p>DSB 已调信号波形的包络与调制信号的波形不一样， 因此采用包络检波的方式所获得的 DSB 包络线不是已调信号波形， 无法恢复出原始信号</p>
+<h3 id="54-、-部分响应系统的优点是什么呢？-缺点是什么？-（-或采用部分响应技术会得到什么好处？-需要付出什么代价？-）"><a href="#54-、-部分响应系统的优点是什么呢？-缺点是什么？-（-或采用部分响应技术会得到什么好处？-需要付出什么代价？-）" class="headerlink" title="54 、 部分响应系统的优点是什么呢？ 缺点是什么？ （ 或采用部分响应技术会得到什么好处？ 需要付出什么代价？ ）"></a>54 、 部分响应系统的优点是什么呢？ 缺点是什么？ （ 或采用部分响应技术会得到什么好处？ 需要付出什么代价？ ）</h3><p>优点： 频带利用率高， 在理论上可达到 2Bd/ Hz； 时域衰减快， 可以放宽对定时信号相位抖动的要求， 系统的频率特性不是理想矩形， 易于实现</p>
+<p>缺点： 抗噪声能力比非部分响应系统差。</p>
+<h3 id="55-、-如何由白噪声得到窄带白噪声，-窄带白噪声的功率与其同相分量的功率及正交分量的功率有何关系："><a href="#55-、-如何由白噪声得到窄带白噪声，-窄带白噪声的功率与其同相分量的功率及正交分量的功率有何关系：" class="headerlink" title="55 、 如何由白噪声得到窄带白噪声， 窄带白噪声的功率与其同相分量的功率及正交分量的功率有何关系："></a>55 、 如何由白噪声得到窄带白噪声， 窄带白噪声的功率与其同相分量的功率及正交分量的功率有何关系：</h3><p>将白噪声通过窄带带通滤波器， 就可以得到窄带白噪声， 窄带白噪声的功率与其同相分量的功率以及正交分量的功率是相同的。</p>
+<h3 id="56-、-为什么-PCM-编码要用对数量化？-A-律和-u-律-PCM-量化特性为什么要用折线代替对数特性？"><a href="#56-、-为什么-PCM-编码要用对数量化？-A-律和-u-律-PCM-量化特性为什么要用折线代替对数特性？" class="headerlink" title="56 、 为什么 PCM 编码要用对数量化？ A 律和 u 律 PCM 量化特性为什么要用折线代替对数特性？"></a>56 、 为什么 PCM 编码要用对数量化？ A 律和 u 律 PCM 量化特性为什么要用折线代替对数特性？</h3><p>对数量化可达到” 小信号量阶小， 大信号量阶大” 的要求， 改善小信号时的量化信噪比， 扩大对输入信号的允许动态范围。 用折线代替对数特性是为了能用数字电路来实现。</p>
+<h3 id="57-、-窄带高斯白噪声中的”-窄带”-、”-高斯”-、”-白”-的含义各是什么？"><a href="#57-、-窄带高斯白噪声中的”-窄带”-、”-高斯”-、”-白”-的含义各是什么？" class="headerlink" title="57 、 窄带高斯白噪声中的” 窄带” 、” 高斯” 、” 白” 的含义各是什么？"></a>57 、 窄带高斯白噪声中的” 窄带” 、” 高斯” 、” 白” 的含义各是什么？</h3><p>窄带的含义是： 频带宽度 B 远小于中心频率 fc， 中心频率 fc 远离零频； 高斯的含义是噪声的瞬时值服从正态分布； 白的含义是噪声的功率谱密度在通带范围内是平坦的， 且是一个常数。</p>
+<h3 id="58-、-什么是频移键控？-2FSK-信号产生和解调方法有哪些？"><a href="#58-、-什么是频移键控？-2FSK-信号产生和解调方法有哪些？" class="headerlink" title="58 、 什么是频移键控？ 2FSK 信号产生和解调方法有哪些？"></a>58 、 什么是频移键控？ 2FSK 信号产生和解调方法有哪些？</h3><p>频移键控是指用不同的载频来表示所传送的数字信息。（ 1 ） 利用矩形脉冲序列对一个载波进行调频产生；（ 2 ）利用受矩形脉冲序列控制的开关电路对两个不同的频率进行选通， 即键控法。</p>
+<p>FSK 的解调通常采用非相干解调和相干解调两种方法， 同时还有鉴频法， 过零检测法和差分检波法。</p>
+<h3 id="59-、-对于抑制载波的双边带信号，-试简述采用插入导频法和直接法实现载波同步各有何优缺点？"><a href="#59-、-对于抑制载波的双边带信号，-试简述采用插入导频法和直接法实现载波同步各有何优缺点？" class="headerlink" title="59 、 对于抑制载波的双边带信号， 试简述采用插入导频法和直接法实现载波同步各有何优缺点？"></a>59 、 对于抑制载波的双边带信号， 试简述采用插入导频法和直接法实现载波同步各有何优缺点？</h3><p>插入导频法： 插入导频法需要在发送端加导频插入电路， 在接收段需加导频提取电路。</p>
+<p>直接法： 是从接收到的已调信号中提取载波， 由于 DSB 信号其功率谱中不含有载波分量， 必须加一非线性电路， 然后再提取。</p>
+<p>相比较而言， 直接法无需在发送端增加任何电路， 因此直接法较插入导频法容易实现且对信号传输的影响要小。</p>
+<h4 id="60-、-解释最佳基带传输系统的含义？-在理想信道下的最佳基带传输系统的结构具有什么特点？"><a href="#60-、-解释最佳基带传输系统的含义？-在理想信道下的最佳基带传输系统的结构具有什么特点？" class="headerlink" title="60 、 解释最佳基带传输系统的含义？ 在理想信道下的最佳基带传输系统的结构具有什么特点？"></a>60 、 解释最佳基带传输系统的含义？ 在理想信道下的最佳基带传输系统的结构具有什么特点？</h4><blockquote>
+<p>最佳基带传输系统的含义是消除码间干扰且抗噪声性能最理想的系统； 在理想信道符合恒参信道且传输特性不会带来频率失真， 因此不用考虑码间干扰， 此时基带传输系统的结构为接收滤波器的特性与信号特性共轭匹配。</p>
+</blockquote>
+<h4 id="61-、-简述连贯式插入法帧同步的基本方法？"><a href="#61-、-简述连贯式插入法帧同步的基本方法？" class="headerlink" title="61 、 简述连贯式插入法帧同步的基本方法？"></a>61 、 简述连贯式插入法帧同步的基本方法？</h4><p>连贯式插入法是在每帧的开头集中插入帧同步码组的方法， 接收端只要检测出帧同步码的位置， 就可识别出帧的开头， 从而确定各路码组的位置获得收发间的帧同步。</p>
+<h3 id="62-、-在设计数字通信接收机输入端带通滤波器的频率特性时，-应考虑哪些因素？-（-至少给出两个因素并说明它们与频率特性的关系）"><a href="#62-、-在设计数字通信接收机输入端带通滤波器的频率特性时，-应考虑哪些因素？-（-至少给出两个因素并说明它们与频率特性的关系）" class="headerlink" title="62 、 在设计数字通信接收机输入端带通滤波器的频率特性时， 应考虑哪些因素？ （ 至少给出两个因素并说明它们与频率特性的关系）"></a>62 、 在设计数字通信接收机输入端带通滤波器的频率特性时， 应考虑哪些因素？ （ 至少给出两个因素并说明它们与频率特性的关系）</h3><p>数字通信接收机输入端带通滤波器的带宽应尽量小， 以尽可能多地滤除信道噪声， 提高带通滤波器输出信噪比， 减小误码率； 另外整个通信系统的频率特性应满足无码间串扰的要求， 而通信系统的频率特性与接收机输入端带通滤波器的频率特性有关， 所以设计此带通滤波器时应满足无码间串扰的条件下， 尽量减小滤波器的带宽。</p>
+<h3 id="63-、-2DPSK-差分解调和相干解调相比其噪声性能哪种方法好，-为什么？"><a href="#63-、-2DPSK-差分解调和相干解调相比其噪声性能哪种方法好，-为什么？" class="headerlink" title="63 、 2DPSK 差分解调和相干解调相比其噪声性能哪种方法好， 为什么？"></a>63 、 2DPSK 差分解调和相干解调相比其噪声性能哪种方法好， 为什么？</h3><p>相干解调比差分相干解调噪声性能好， 因为它的本地载波包含的噪声小， 而后者是用前一码元的波形来代替本地载波， 包含了信道噪声。</p>
+<h3 id="64-、-有哪几种同步信号？-在何处？-有何要求？"><a href="#64-、-有哪几种同步信号？-在何处？-有何要求？" class="headerlink" title="64 、 有哪几种同步信号？ 在何处？ 有何要求？"></a>64 、 有哪几种同步信号？ 在何处？ 有何要求？</h3><p>有四种同步信号。 一是载波同步， 在相干解调时， 要求载波同步信号要与发送信号同频同相。 二是码元同步， 在抽样判决处， 要求同步信息频率与码元速率相同的定时脉冲。 三是群同步， 获取每帧的起止标志， 以便对接收码元能正确分组。 四是网同步， 是使通信网中各站点时钟保持同步。</p>
+<h3 id="65-、-什么是群同步法？-群同步有哪几种方法？"><a href="#65-、-什么是群同步法？-群同步有哪几种方法？" class="headerlink" title="65 、 什么是群同步法？ 群同步有哪几种方法？"></a>65 、 什么是群同步法？ 群同步有哪几种方法？</h3><p>为了使接收码元能够正确分组。 又叫帧同步。 群同步方法有三种。 一是起止同步法， 二是分散插入法， 三是集中插入法。 起止同步法是在每帧数据的开头集中插入群同步码组。 集中插入法是寻找一组在信息码中很少出现的特殊码组， 将同步码插在信息码前面， 常用巴克码。 分散插入法是将同步码等间隔得插在信息码中。</p>
+<h3 id="66-、-为什么会产生相位模糊问题"><a href="#66-、-为什么会产生相位模糊问题" class="headerlink" title="66 、 为什么会产生相位模糊问题"></a>66 、 为什么会产生相位模糊问题</h3><p>这是由于平方后产生的载波频率是原始载波频率的两倍，故需要使用二分 频电路， 由于分频起点的不确定性， 导致了相位模糊。</p>
+
+        </article>
+
+        
+            
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>weichang wen<br>
+    
+    <strong>Link：</strong><a href="https://wen990806.github.io/2022/01/10/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89/" title="https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;10&#x2F;%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;wen990806.github.io&#x2F;2022&#x2F;01&#x2F;10&#x2F;%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%EF%BC%8866%E9%A2%98%EF%BC%89&#x2F;</a><br>
+
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+        
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/2022/" rel="tag">2022</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" rel="tag">通信原理</a>
+    
+</div>
+
+    <div class="nexmoe-post-footer">
+        <section class="nexmoe-comment">
+    <div class="valine"></div>
+<script src="https://unpkg.com/leancloud-storage/dist/av-min.js"></script>
+<script src='https://unpkg.com/valine@1.3.9/dist/Valine.min.js'></script>
+<script>
+    // 使用方法 https://valine.js.org/quickstart.html
+    new Valine({
+        el: '.valine',
+        appId: 'r5zxC0st0DDjPA9auXzMV7HY-gzGzoHsz',
+        appKey: '3bqCsovpyfTPHUzTHovd3V3V'
+    })
+</script>
+</section>
+    </div>
+</div>
+
+
+        <div class="nexmoe-post-right">
+          
+            <div class="nexmoe-fixed">
+              <div class="nexmoe-tool">
+                <a href="#" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+              </div>
+            </div>
+          
+        </div>
+    </div>
+  </div>
+  <div id="nexmoe-pendant">
+    <div class="nexmoe-drawer mdui-drawer nexmoe-pd" id="drawer">
+        
+            <div class="nexmoe-pd-item">
+                <div class="clock">
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="memory"></div>
+        <div class="needle" id="hours"></div>
+        <div class="needle" id="minutes"></div>
+        <div class="needle" id="seconds"></div>
+        <div class="clock_logo">
+
+        </div>
+
+    </div>
+<style>
+    .clock {
+        background-color: #ffffff;
+        width: 70vw;
+        height: 70vw;
+        max-width: 70vh;
+        max-height: 70vh;
+        border: solid 2.8vw #242424;
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+        box-sizing: border-box;
+        box-shadow: 0 1.4vw 2.8vw rgba(0, 0, 0, 0.8);
+        zoom:0.2
+    }
+
+    .memory {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .memory:nth-child(1) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(0deg) translateY(-520%);
+    }
+
+    .memory:nth-child(2) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(6deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(3) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(12deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(4) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(18deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(5) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(24deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(6) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(30deg) translateY(-520%);
+    }
+
+    .memory:nth-child(7) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(36deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(8) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(42deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(9) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(48deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(10) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(54deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(11) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(60deg) translateY(-520%);
+    }
+
+    .memory:nth-child(12) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(66deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(13) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(72deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(14) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(78deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(15) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(84deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(16) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(90deg) translateY(-520%);
+    }
+
+    .memory:nth-child(17) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(96deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(18) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(102deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(19) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(108deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(20) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(114deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(21) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(120deg) translateY(-520%);
+    }
+
+    .memory:nth-child(22) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(126deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(23) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(132deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(24) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(138deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(25) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(144deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(26) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(150deg) translateY(-520%);
+    }
+
+    .memory:nth-child(27) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(156deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(28) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(162deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(29) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(168deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(30) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(174deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(31) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(180deg) translateY(-520%);
+    }
+
+    .memory:nth-child(32) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(186deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(33) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(192deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(34) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(198deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(35) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(204deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(36) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(210deg) translateY(-520%);
+    }
+
+    .memory:nth-child(37) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(216deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(38) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(222deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(39) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(228deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(40) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(234deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(41) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(240deg) translateY(-520%);
+    }
+
+    .memory:nth-child(42) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(246deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(43) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(252deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(44) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(258deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(45) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(264deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(46) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(270deg) translateY(-520%);
+    }
+
+    .memory:nth-child(47) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(276deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(48) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(282deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(49) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(288deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(50) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(294deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(51) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(300deg) translateY(-520%);
+    }
+
+    .memory:nth-child(52) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(306deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(53) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(312deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(54) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(318deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(55) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(324deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(56) {
+        background-color: #424242;
+        width: 2%;
+        height: 8%;
+        transform: translate(-50%, -50%) rotate(330deg) translateY(-520%);
+    }
+
+    .memory:nth-child(57) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(336deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(58) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(342deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(59) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(348deg) translateY(-1461%);
+    }
+
+    .memory:nth-child(60) {
+        background-color: #949494;
+        width: 1%;
+        height: 3%;
+        transform: translate(-50%, -50%) rotate(354deg) translateY(-1461%);
+    }
+
+    .needle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+    }
+
+    .needle#hours {
+        background-color: #1f1f1f;
+        width: 4%;
+        height: 30%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#hours.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#hours:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#minutes {
+        background-color: #1f1f1f;
+        width: 2%;
+        height: 45%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#minutes.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#minutes:after {
+        content: '';
+        background-color: #1f1f1f;
+        width: 4vw;
+        height: 4vw;
+        max-width: 4vh;
+        max-height: 4vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .needle#seconds {
+        background-color: #cb2f2f;
+        width: 1%;
+        height: 50%;
+        transform-origin: center 75%;
+        transform: translate(-50%, -75%);
+    }
+
+    .needle#seconds.moving {
+        transition: transform 150ms ease-out;
+    }
+
+    .needle#seconds:after {
+        content: '';
+        background-color: #cb2f2f;
+        width: 2.5vw;
+        height: 2.5vw;
+        max-width: 2.5vh;
+        max-height: 2.5vh;
+        display: block;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .clock_logo{
+        width: 10vw;
+        height: 10vw;
+        max-width: 10vh;
+        max-height: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        box-sizing: border-box;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    @media (min-width: 100vh) {
+        .clock {
+            border: solid 2.8vh #242424;
+            box-shadow: 0 1.4vh 2.8vh rgba(0, 0, 0, 0.8);
+        }
+    }
+
+</style>
+
+
+
+
+
+            </div>
+        
+            <div class="nexmoe-pd-item">
+                <div class="qweather" >
+    <div id="he-plugin-standard"></div>
+    <div class="qweather-logo">
+
+    </div>
+
+</div>
+<style>
+    .qweather{
+        position: relative;
+    }
+    .qweather-logo{
+        position: absolute;
+        right: 0;
+        top: -15px;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+</style>
+<script>
+  WIDGET = {
+    "CONFIG": {
+      "layout": "2",
+      "width": "260",
+      "height": "220",
+      "background": "5",
+      "dataColor": "e67249",
+      "borderRadius": "15",
+      "key": "f74d1e1690e6432d801e97fa2f05a162"
+    }
+  }
+</script>
+<script src="https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"></script>
+
+            </div>
+        
+</div>
+<style>
+    .nexmoe-pd {
+        left: auto;
+        top: 40px;
+        right: 0;
+    }
+    .nexmoe-pd-item{
+       display: flex;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+</style>
+
+  </div>
+  <script src="https://unpkg.com/lazysizes@5.1.0/lazysizes.min.js"></script>
+<script src="https://cdn.staticfile.org/highlight.js/10.0.0/highlight.min.js"></script>
+<script src="https://unpkg.com/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://unpkg.com/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/app.js?v=1653562397282"></script>
+
+<script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+<!-- hexo injector body_end start -->
+<script src="/js/clock.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js"></script>
+
+<script src="/lib/codeBlock/codeBlockFuction.js"></script>
+
+<script src="/lib/codeBlock/codeLang.js"></script>
+
+<script src="/lib/codeBlock/codeCopy.js"></script>
+
+<script src="/lib/codeBlock/codeShrink.js"></script>
+
+<link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="/js/webapp.js"></script>
+<!-- hexo injector body_end end --></body>
+</html>
+
+<script>(function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/250cb4aa.js","daovoice")</script>
+<script>
+  daovoice('init', {
+    app_id: "250cb4aa"
+  });
+  daovoice('update');
+</script>
+
