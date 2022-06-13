@@ -31,7 +31,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1653565417156">
+  <link rel="stylesheet" href="/css/style.css?v=1655121534417">
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -56,9 +56,9 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div class="nexmoe-count-item"><span>Articles</span>18 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
-        <div class="nexmoe-count-item"><span>Tags</span>7<div class="item-radius"></div><div class="item-radius item-right"></div></div>
-        <div class="nexmoe-count-item"><span>Categories</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Articles</span>21 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>Tags</span>8<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Categories</span>5<div class="item-radius"></div><div class="item-radius item-right"></div></div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
@@ -130,8 +130,22 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/基础配置/">基础配置</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/生活足迹/">生活足迹</a>
           <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/语言/">语言</a>
+          <span class="category-list-count">2</span>
         </li>
 
         
@@ -152,7 +166,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 14px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16px;">can</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 12px;">通信原理</a>
+      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 15px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16.67px;">can</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 13.33px;">开发</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18.33px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 11.67px;">通信原理</a>
     </div>
     
   </div>
@@ -162,7 +176,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">Archive</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">18</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
@@ -201,6 +215,324 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
+        <a href="/2022/06/13/python%E8%BF%9B%E9%98%B6/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
+                    <img data-src="/2022/06/03/python基础/1.png" data-sizes="auto" alt="python进阶" class="lazyload">
+                    <h1>python进阶</h1>
+                </div>
+            
+        </a>
+        
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月13日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.7k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
+        </div>
+        
+        <article>
+            
+                <h1 id="PYTHON进阶"><a href="#PYTHON进阶" class="headerlink" title="PYTHON进阶"></a>PYTHON进阶</h1><h3 id="生成式（推导式）的用法"><a href="#生成式（推导式）的用法" class="headerlink" title="生成式（推导式）的用法"></a>生成式（推导式）的用法</h3><pre><code class="python">prices = &#123;
+    &#39;AAPL&#39;: 191.88,
+    &#39;GOOG&#39;: 1186.96,
+    &#39;IBM&#39;: 149.24,
+    &#39;ORCL&#39;: 48.44,
+    &#39;ACN&#39;: 166.89,
+    &#39;FB&#39;: 208.09,
+    &#39;SYMC&#39;: 21.29
+&#125;
+# 用股票价格大于100元的股票构造一个新的字典
+prices2 = &#123;key: value for key, value in prices.items() if value &gt; 100&#125;
+#key:value for key 字典遍历
+print(prices2)
+</code></pre>
+<h3 id="嵌套的列表的坑"><a href="#嵌套的列表的坑" class="headerlink" title="嵌套的列表的坑"></a>嵌套的列表的坑</h3><pre><code class="python">names = [&#39;关羽&#39;, &#39;张飞&#39;, &#39;赵云&#39;, &#39;马超&#39;, &#39;黄忠&#39;]
+courses = [&#39;语文&#39;, &#39;数学&#39;, &#39;英语&#39;]
+# 录入五个学生三门课程的成绩
+scores = [[None] * len(courses) for _ in range(len(names))]
+#enumerate 是列表索引
+for row, name in enumerate(names):
+    for col, course in enumerate(courses):
+        scores[row][col] = float(input(f&#39;请输入&#123;name&#125;的&#123;course&#125;成绩: &#39;))
+        print(scores)
+</code></pre>
+<h3 id="heapq模块（堆排序）"><a href="#heapq模块（堆排序）" class="headerlink" title="heapq模块（堆排序）"></a>heapq模块（堆排序）</h3><pre><code class="python">&quot;&quot;&quot;
+从列表中找出最大的或最小的N个元素
+堆结构(大根堆/小根堆)
+&quot;&quot;&quot;
+import heapq
+
+list1 = [34, 25, 12, 99, 87, 63, 58, 78, 88, 92]
+list2 = [
+    &#123;&#39;name&#39;: &#39;IBM&#39;, &#39;shares&#39;: 100, &#39;price&#39;: 91.1&#125;,
+    &#123;&#39;name&#39;: &#39;AAPL&#39;, &#39;shares&#39;: 50, &#39;price&#39;: 543.22&#125;,
+    &#123;&#39;name&#39;: &#39;FB&#39;, &#39;shares&#39;: 200, &#39;price&#39;: 21.09&#125;,
+    &#123;&#39;name&#39;: &#39;HPQ&#39;, &#39;shares&#39;: 35, &#39;price&#39;: 31.75&#125;,
+    &#123;&#39;name&#39;: &#39;YHOO&#39;, &#39;shares&#39;: 45, &#39;price&#39;: 16.35&#125;,
+    &#123;&#39;name&#39;: &#39;ACME&#39;, &#39;shares&#39;: 75, &#39;price&#39;: 115.65&#125;
+]
+print(heapq.nlargest(3, list1))
+print(heapq.nsmallest(3, list1))
+print(heapq.nlargest(2, list2, key=lambda x: x[&#39;price&#39;]))
+print(heapq.nlargest(2, list2, key=lambda x: x[&#39;shares&#39;]))
+#key = lambda x:x[0] 寻找该元素中的值
+#max(num,key=lambda x:x[1])寻找位置2的元素最大值
+</code></pre>
+<h3 id="itertools模块"><a href="#itertools模块" class="headerlink" title="itertools模块"></a>itertools模块</h3><pre><code class="python">&quot;&quot;&quot;
+迭代工具模块
+&quot;&quot;&quot;
+import itertools
+
+# 产生ABCD的全排列
+itertools.permutations(&#39;ABCD&#39;)
+# 产生ABCDE的五选三组合
+itertools.combinations(&#39;ABCDE&#39;, 3)
+# 产生ABCD和123的笛卡尔积
+itertools.product(&#39;ABCD&#39;, &#39;123&#39;)
+# 产生ABC的无限循环序列
+itertools.cycle((&#39;A&#39;, &#39;B&#39;, &#39;C&#39;))
+</code></pre>
+<h3 id="itertools模块-1"><a href="#itertools模块-1" class="headerlink" title="itertools模块"></a>itertools模块</h3><pre><code class="python">&quot;&quot;&quot;
+迭代工具模块
+&quot;&quot;&quot;
+import itertools
+
+# 产生ABCD的全排列
+itertools.permutations(&#39;ABCD&#39;)
+# 产生ABCDE的五选三组合
+itertools.combinations(&#39;ABCDE&#39;, 3)
+# 产生ABCD和123的笛卡尔积
+itertools.product(&#39;ABCD&#39;, &#39;123&#39;)
+# 产生ABC的无限循环序列
+itertools.cycle((&#39;A&#39;, &#39;B&#39;, &#39;C&#39;))
+
+for item in itertools.permutations(&#39;ABCD&#39;):
+    print(item)
+
+
+#类似生成排列组合
+</code></pre>
+<h3 id="collections模块"><a href="#collections模块" class="headerlink" title="collections模块"></a>collections模块</h3><pre><code class="python">&quot;&quot;&quot;
+找出序列中出现次数最多的元素
+&quot;&quot;&quot;
+from collections import Counter
+
+words = [
+    &#39;look&#39;, &#39;into&#39;, &#39;my&#39;, &#39;eyes&#39;, &#39;look&#39;, &#39;into&#39;, &#39;my&#39;, &#39;eyes&#39;,
+    &#39;the&#39;, &#39;eyes&#39;, &#39;the&#39;, &#39;eyes&#39;, &#39;the&#39;, &#39;eyes&#39;, &#39;not&#39;, &#39;around&#39;,
+    &#39;the&#39;, &#39;eyes&#39;, &quot;don&#39;t&quot;, &#39;look&#39;, &#39;around&#39;, &#39;the&#39;, &#39;eyes&#39;,
+    &#39;look&#39;, &#39;into&#39;, &#39;my&#39;, &#39;eyes&#39;, &quot;you&#39;re&quot;, &#39;under&#39;
+]
+counter = Counter(words)
+print(counter.most_common(3))
+</code></pre>
+<h2 id="数据结构和算法"><a href="#数据结构和算法" class="headerlink" title="数据结构和算法"></a>数据结构和算法</h2><h3 id="排序算法（选择、冒泡）和查找算法（顺序和折半）"><a href="#排序算法（选择、冒泡）和查找算法（顺序和折半）" class="headerlink" title="排序算法（选择、冒泡）和查找算法（顺序和折半）"></a>排序算法（选择、冒泡）和查找算法（顺序和折半）</h3><pre><code class="python">#选择排序
+import sys
+
+A = [64, 25, 12, 22, 11]
+for i in range(len(A)):
+
+    min_idx = i
+    for j in range(i + 1, len(A)):
+        if A[min_idx] &gt; A[j]:
+            min_idx = j
+
+    A[i], A[min_idx] = A[min_idx], A[i] #两个互换位置
+
+print(&quot;排序后的数组：&quot;)
+for i in range(len(A)):
+    print(&quot;%d&quot; % A[i])
+</code></pre>
+<pre><code class="python">#冒泡排序
+def bubbleSort(arr):
+    n = len(arr)
+
+    # 遍历所有数组元素
+    for i in range(n):
+
+        # Last i elements are already in place
+        for j in range(0, n - i - 1):
+
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+
+arr = [64, 34, 25, 12, 22, 11, 90]
+
+bubbleSort(arr)
+
+print(&quot;排序后的数组:&quot;)
+for i in range(len(arr)):
+    print(&quot;%d&quot; % arr[i])
+</code></pre>
+<pre><code class="python">def seq_search(items, key):
+    &quot;&quot;&quot;顺序查找&quot;&quot;&quot;
+    for index, item in enumerate(items):
+        if item == key:
+            return index
+    return -1
+
+items=[1,45533,344,2131]
+print(seq_search(items,344))
+</code></pre>
+<pre><code class="python">#感觉只适合奇数
+def bin_search(items, key):
+    &quot;&quot;&quot;折半查找&quot;&quot;&quot;
+    start, end = 0, len(items) - 1
+    while start &lt;= end:
+        mid = (start + end) // 2
+        if key &gt; items[mid]:
+            start = mid + 1
+        elif key &lt; items[mid]:
+            end = mid - 1
+        else:
+            return mid
+    return -1
+
+items=[1,45533,22,344,2131]
+print(bin_search(items,344))
+</code></pre>
+<h3 id="常用算法："><a href="#常用算法：" class="headerlink" title="常用算法："></a>常用算法：</h3><ul>
+<li><p>  穷举法 - 又称为暴力破解法，对所有的可能性进行验证，直到找到正确答案。</p>
+</li>
+<li><p>  贪婪法 - 在对问题求解时，总是做出在当前看来最好的选择，不追求最优解，快速找到满意解。</p>
+</li>
+<li><p>  分治法 - 把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题，直到可以直接求解的程度，最后将子问题的解进行合并得到原问题的解。</p>
+</li>
+<li><p>  回溯法 - 回溯法又称为试探法，按选优条件向前搜索，当搜索到某一步发现原先选择并不优或达不到目标时，就退回一步重新选择。</p>
+</li>
+<li><p>  动态规划 - 基本思想也是将待求解问题分解成若干个子问题，先求解并保存这些子问题的解，避免产生大量的重复运算。</p>
+</li>
+</ul>
+<pre><code class="python">#穷举法例子：百钱百鸡和五人分鱼。
+# 公鸡5元一只 母鸡3元一只 小鸡1元三只
+# 用100元买100只鸡 问公鸡/母鸡/小鸡各多少只
+for x in range(20):
+    for y in range(33):
+        z = 100 - x - y
+        if 5 * x + 3 * y + z // 3 == 100 and z % 3 == 0:
+            print(x, y, z)
+</code></pre>
+<h3 id="面向对象相关知识"><a href="#面向对象相关知识" class="headerlink" title="面向对象相关知识"></a>面向对象相关知识</h3><p>三大支柱：封装、继承、多态</p>
+<p>例子：工资结算系统。</p>
+<pre><code class="python">&quot;&quot;&quot;
+月薪结算系统 - 部门经理每月15000 程序员每小时200 销售员1800底薪加销售额5%提成
+&quot;&quot;&quot;
+from abc import ABCMeta, abstractmethod
+
+class Employee(metaclass=ABCMeta):
+    &quot;&quot;&quot;员工(抽象类)&quot;&quot;&quot;
+
+    def __init__(self, name):
+        self.name = name
+
+    @abstractmethod
+    def get_salary(self):
+        &quot;&quot;&quot;结算月薪(抽象方法)&quot;&quot;&quot;
+        pass
+
+class Manager(Employee):
+    &quot;&quot;&quot;部门经理&quot;&quot;&quot;
+
+    def get_salary(self):
+        return 15000.0
+
+class Programmer(Employee):
+    &quot;&quot;&quot;程序员&quot;&quot;&quot;
+
+    def __init__(self, name, working_hour=0):
+        self.working_hour = working_hour
+        super().__init__(name)
+
+    def get_salary(self):
+        return 200.0 * self.working_hour
+
+class Salesman(Employee):
+    &quot;&quot;&quot;销售员&quot;&quot;&quot;
+
+    def __init__(self, name, sales=0.0):
+        self.sales = sales
+        super().__init__(name)
+
+    def get_salary(self):
+        return 1800.0 + self.sales * 0.05
+
+class EmployeeFactory:
+    &quot;&quot;&quot;创建员工的工厂（工厂模式 - 通过工厂实现对象使用者和对象之间的解耦合）&quot;&quot;&quot;
+
+    @staticmethod
+    def create(emp_type, *args, **kwargs):
+        &quot;&quot;&quot;创建员工&quot;&quot;&quot;
+        all_emp_types = &#123;&#39;M&#39;: Manager, &#39;P&#39;: Programmer, &#39;S&#39;: Salesman&#125;
+        cls = all_emp_types[emp_type.upper()]
+        return cls(*args, **kwargs) if cls else None
+
+def main():
+    &quot;&quot;&quot;主函数&quot;&quot;&quot;
+    emps = [
+        EmployeeFactory.create(&#39;M&#39;, &#39;曹操&#39;), 
+        EmployeeFactory.create(&#39;P&#39;, &#39;荀彧&#39;, 120),
+        EmployeeFactory.create(&#39;P&#39;, &#39;郭嘉&#39;, 85), 
+        EmployeeFactory.create(&#39;S&#39;, &#39;典韦&#39;, 123000),
+    ]
+    for emp in emps:
+        print(f&#39;&#123;emp.name&#125;: &#123;emp.get_salary():.2f&#125;元&#39;)
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2022/06/03/python%E5%9F%BA%E7%A1%80/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
+                    <img data-src="/2022/06/03/python基础/1.png" data-sizes="auto" alt="python基础" class="lazyload">
+                    <h1>python基础</h1>
+                </div>
+            
+        </a>
+        
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月03日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.6k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
+        </div>
+        
+        <article>
+            
+                <h1 id="python基础"><a href="#python基础" class="headerlink" title="python基础"></a>python基础</h1><h2 id="PYTHON代码书写格式"><a href="#PYTHON代码书写格式" class="headerlink" title="PYTHON代码书写格式"></a>PYTHON代码书写格式</h2>
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
+        <a href="/2022/06/01/GIT/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
+                    <img data-src="/2022/06/01/GIT/1.png" data-sizes="auto" alt="GIT" class="lazyload">
+                    <h1>GIT</h1>
+                </div>
+            
+        </a>
+        
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2022年06月01日</a>
+            <a><i class="nexmoefont icon-areachart"></i>204 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
+        </div>
+        
+        <article>
+            
+                <h1 id="GIt"><a href="#GIt" class="headerlink" title="GIt"></a>GIt</h1><h3 id="Git软件配置"><a href="#Git软件配置" class="headerlink" title="Git软件配置"></a>Git软件配置</h3><p>通过ssh 的方式来访问服务器，和提交代码到服务器。ssh 是基于网络的完全传输协议,需要配置一下ssh 公钥，用来做每次访问的自动认证，也帮我们省去每次访问输入密码的步骤</p>
+            
+        </article>
+    </div>
+    
+    <div class="nexmoe-post">
         <a href="/2022/05/21/%E5%9B%9B%E5%AD%A3%E4%B8%8D%E8%BF%87%E6%98%A5%E5%A4%8F%EF%BC%8C%E5%9B%9B%E5%B9%B4%E4%B8%8D%E6%98%8E%E7%A7%8B%E5%86%AC/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
@@ -235,7 +567,7 @@
         
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>331 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>373 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
         
@@ -363,79 +695,10 @@
         </article>
     </div>
     
-    <div class="nexmoe-post">
-        <a href="/2022/01/26/%E5%85%B3%E4%BA%8E%E8%A2%AB%E6%8A%93%E5%8E%BB%E4%BA%A7%E7%BA%BF%E6%94%AF%E6%8F%B4%E4%B8%A4%E5%A4%A9%E4%B8%AA%E4%BA%BA%E6%83%B3%E6%B3%95/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
-                    <img data-src="/2022/01/26/关于被抓去产线支援两天个人想法/2.jpg" data-sizes="auto" alt="关于被抓去产线支援两天个人想法" class="lazyload">
-                    <h1>关于被抓去产线支援两天个人想法</h1>
-                </div>
-            
-        </a>
-        
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月26日</a>
-            <a><i class="nexmoefont icon-areachart"></i>912 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
-        </div>
-        
-        <article>
-            
-                <p>如标题所示，就是被抓去产线支援了，不知道从何说起，还是按照时间线吧……</p>
-            
-        </article>
-    </div>
-    
-    <div class="nexmoe-post">
-        <a href="/2022/01/22/%E2%80%98XCP%E5%8D%8F%E8%AE%AE%E2%80%99/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
-                    <img data-src="/2022/01/22/‘XCP协议’/xcp.png" data-sizes="auto" alt="‘XCP协议’" class="lazyload">
-                    <h1>‘XCP协议’</h1>
-                </div>
-            
-        </a>
-        
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>4k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 16 分钟</a>
-        </div>
-        
-        <article>
-            
-                <h1 id="XCP协议"><a href="#XCP协议" class="headerlink" title="XCP协议"></a>XCP协议</h1><p>XCP（Universal Measurement and Calibration Protocol）协议，XCP”中”X”是Universal，通用的，表示能适配它能够支持多种底层网络协议和总线类型。XCP的主要应用于测量和标定ECU内部参数。此协议能够使数据采集工作与ECU内部运行的任务和中断同步，从而保证每当ECU软件更新参数时，能快速采集到所需的参数值。</p>
-            
-        </article>
-    </div>
-    
-    <div class="nexmoe-post">
-        <a href="/2022/01/22/can-Bus-off/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: NaN%;">
-                    <img data-src="/2022/01/22/can-Bus-off/bus.png" data-sizes="auto" alt="can Bus off" class="lazyload">
-                    <h1>can Bus off</h1>
-                </div>
-            
-        </a>
-        
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月22日</a>
-            <a><i class="nexmoefont icon-areachart"></i>2.5k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 10 分钟</a>
-        </div>
-        
-        <article>
-            
-                <h1 id="Can-Busoff"><a href="#Can-Busoff" class="headerlink" title="Can Busoff"></a>Can Busoff</h1><p>error active 轻微的 error passive被动错误 bus off 总线关闭</p>
-            
-        </article>
-    </div>
-    
 </section>
 
     <nav class="nexmoe-page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="extend next" rel="next" href="/archives/2022/page/2/"><i class="nexmoefont icon-right"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="page-number" href="/archives/2022/page/3/">3</a><a class="extend next" rel="next" href="/archives/2022/page/2/"><i class="nexmoefont icon-right"></i></a>
     </nav>
   
 
@@ -1151,7 +1414,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1653565417158"></script>
+<script src="/js/app.js?v=1655121534418"></script>
 
 <script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

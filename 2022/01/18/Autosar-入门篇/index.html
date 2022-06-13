@@ -56,7 +56,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1653565417141">
+  <link rel="stylesheet" href="/css/style.css?v=1655121534411">
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -81,9 +81,9 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div class="nexmoe-count-item"><span>Articles</span>18 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
-        <div class="nexmoe-count-item"><span>Tags</span>7<div class="item-radius"></div><div class="item-radius item-right"></div></div>
-        <div class="nexmoe-count-item"><span>Categories</span>3<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Articles</span>21 <div class="item-radius"></div><div class="item-radius item-right"></div> </div>
+        <div class="nexmoe-count-item"><span>Tags</span>8<div class="item-radius"></div><div class="item-radius item-right"></div></div>
+        <div class="nexmoe-count-item"><span>Categories</span>5<div class="item-radius"></div><div class="item-radius item-right"></div></div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
@@ -155,8 +155,22 @@
         
 
         <li class="category-list-item">
+          <a class="category-list-link" href="/categories/基础配置/">基础配置</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
           <a class="category-list-link" href="/categories/生活足迹/">生活足迹</a>
           <span class="category-list-count">6</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/语言/">语言</a>
+          <span class="category-list-count">2</span>
         </li>
 
         
@@ -177,7 +191,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 14px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16px;">can</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 12px;">通信原理</a>
+      <a href="/tags/2021/" style="font-size: 10px;">2021</a> <a href="/tags/2022/" style="font-size: 20px;">2022</a> <a href="/tags/Autosar/" style="font-size: 15px;">Autosar</a> <a href="/tags/UDS/" style="font-size: 10px;">UDS</a> <a href="/tags/can/" style="font-size: 16.67px;">can</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 13.33px;">开发</a> <a href="/tags/%E8%AE%A4%E7%9C%9F%E7%94%9F%E6%B4%BB/" style="font-size: 18.33px;">认真生活</a> <a href="/tags/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86/" style="font-size: 11.67px;">通信原理</a>
     </div>
     
   </div>
@@ -187,7 +201,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">Archive</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">18</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">21</span></li></ul>
     </div>
   </div>
 
@@ -302,17 +316,19 @@
 <p> 一个接口可以包含多个数据，类似于通过结构体传输 </p>
 <p>可以传输基础数据类型（int，float等）和复杂数据类型（record，array等）</p>
 <p> 再说具体一点，举个例子调用接收接口</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rte_Read_&lt;Port&gt;_&lt;Data&gt;() </span><br><span class="line"><span class="comment">//这里的xx是指的传输的数据内容，比如DoorOpen就是</span></span><br><span class="line"> SWC_DoorOpen = Rte_Read_Door_DoorOpen();</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">Rte_Read_&lt;Port&gt;_&lt;Data&gt;() 
+//这里的xx是指的传输的数据内容，比如DoorOpen就是
+ SWC_DoorOpen = Rte_Read_Door_DoorOpen();
+</code></pre>
 <h4 id="（3）、C-S接口"><a href="#（3）、C-S接口" class="headerlink" title="（3）、C/S接口"></a>（3）、C/S接口</h4><p>作用： 提供操作。就是Server提供函数供Client调用 </p>
 <p>可以同步和异步。同步就是直接调用，相当于函数直接插入上下文运行；异步的话需要等待，相当于让函数在另一个线程中运行，运行完了再返回，原上下文依然运行</p>
 <p> 一个接口可以提供多个操作，就是一个接口可以包含很多函数</p>
 <p> ECU内部和跨ECU都可以调用，跨ECU也是通过外部总线 </p>
 <p>再说具体一点，举个例子调用客户接口：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Rte_Call_&lt;Port&gt;_&lt;Function&gt;()</span><br><span class="line"> <span class="comment">//这里的xx是指的调用的函数，比如调用State()就是： </span></span><br><span class="line"> Rte_Call_Door_State();</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">Rte_Call_&lt;Port&gt;_&lt;Function&gt;()
+ //这里的xx是指的调用的函数，比如调用State()就是： 
+ Rte_Call_Door_State();
+</code></pre>
 <h3 id="5-Runnables可运行实体"><a href="#5-Runnables可运行实体" class="headerlink" title="5.Runnables可运行实体"></a>5.Runnables可运行实体</h3><p>Runnable就是SWC中的函数，而在AutoSAR架构在被DaVinci软件生成的时候，Runnable是空函数，需要手动添加代码来实现其实际的功能。 Runnable可以被触发，比如被定时器触发、被操作调用触发或者被接受数据触发等。</p>
 <p>补充一点的是：Runnable是需要OS中的Task做载体的。这句话是什么意思呢——<br>runnable是函数，但是再c文件中光有一个函数那没用，必须要调用该函数才能起作用，就必须要有操作系统中的任务来执行这个函数。类比于Windows中的线程就是Task，runnable就运行在线程上这种感觉。值得注意的是：而操作系统和AutoSAR架构是两回事，Task不是架构里的概念，而是操作系统中的概念，在AppL中没有Task这个概念，不可混为一谈。</p>
 <h2 id="三-RTE概述"><a href="#三-RTE概述" class="headerlink" title="三. RTE概述"></a>三. RTE概述</h2><h3 id="1、什么是RTE"><a href="#1、什么是RTE" class="headerlink" title="1、什么是RTE"></a>1、什么是RTE</h3><p>RTE的作用有点像一个快递中转站或者说是电话接线员（就是上个世界那种要先打电话到接线员那里，然后通过接线员转接电话线到目的地），其作用就是将一个SWC的信息通过RTE连接到其他SWC或者BSW上。且RTE具有管理这些信息的功能，比如接收的SWC正忙（您所拨打的用户正忙），那么RTE负责让发送信息的SWC等待，或者做其他处理；RTE还能触发SWC，就像是这时接收的SWC在睡觉，这时发送的SWC发信息来了，那么RTE就要把接收的SWC叫醒起床。一句话概括就是RTE提供了SWC的运行环境</p>
@@ -341,19 +357,19 @@
 <p> 实现AR-COM的回调功能，具体实现是在SWC中完成的，RTE负责完成这个回调机制</p>
 <h4 id="1-、直接调用（Direct）"><a href="#1-、直接调用（Direct）" class="headerlink" title="(1)、直接调用（Direct）"></a>(1)、直接调用（Direct）</h4><p>相当于有一个全局变量，runnable可以直接读写这个变量</p>
 <p>用的是下面的语法：(注意<data>和data的区别，带&lt;&gt;的是指全局data的名字，不带&lt;&gt;的data是局部变量的名字，这里使用指针，就是说操作的是同一个地址，没有复制使用；同时，这些函数都是在runnable中使用的，不要看是Rte，就以为是RTE中的代码，因为调用的是RTE的机制，所以这里是Rte)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Std_ReturnType Rte_Read_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; *data)</span><br><span class="line">Std_ReturnType Rte_Write_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">Std_ReturnType Rte_Read_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; *data)
+Std_ReturnType Rte_Write_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)
+</code></pre>
 <h4 id="2-、缓存调用（Buffered）"><a href="#2-、缓存调用（Buffered）" class="headerlink" title="(2)、缓存调用（Buffered）"></a>(2)、缓存调用（Buffered）</h4><p>相当于将全局变量先复制到一个runnable的局部变量中，再操作这个局部变量，最后把这个局部变量再赋值到全局变量中。在runnable操作这个局部变量期间，全局变量是不会改变的。</p>
 <p>使用方法如下：（都是由RTE管理的，用户只需要正确调用函数就ok）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;DataType&gt; Rte_IRead_&lt;r&gt;_&lt;port&gt;_&lt;data&gt; (<span class="type">void</span>) </span><br><span class="line"><span class="type">void</span> Rte_IWrite_&lt;r&gt;_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">&lt;DataType&gt; Rte_IRead_&lt;r&gt;_&lt;port&gt;_&lt;data&gt; (void) 
+void Rte_IWrite_&lt;r&gt;_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)
+</code></pre>
 <h4 id="3、队列调用（Queued）"><a href="#3、队列调用（Queued）" class="headerlink" title="3、队列调用（Queued）"></a>3、队列调用（Queued）</h4><p>因为数据不止一个，是一组队列的数据，就像我们常用的串口FIFO。因此，可以设置循环接收或者等待接收，等待的话是有超时管理的</p>
 <p>调用代码如下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Std_ReturnType Rte_Receive_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; *data) </span><br><span class="line">Std_ReturnType Rte_Send_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">Std_ReturnType Rte_Receive_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; *data) 
+Std_ReturnType Rte_Send_&lt;port&gt;_&lt;data&gt; (&lt;DataType&gt; data)
+</code></pre>
 <h4 id="4、C-S接口的实现"><a href="#4、C-S接口的实现" class="headerlink" title="4、C/S接口的实现"></a>4、C/S接口的实现</h4><p>之前在第二章AppL中讲过了C/S接口，这里再更加深入的说明一下其实现的原理：首先，C/S接口就是客户/服务接口，这个接口就是客户来调用服务端的操作的一个接口。也就是我写着写着，发现我想要调用一个函数，这个函数在其他的C文件中，就让RTE帮忙调用。</p>
 <p>而这里又有两种方式：异步和同步：</p>
 <p>同步就是说我这个人很懒，我要等服务端运行完了这个函数，RTE返回这个函数的结果后，我才开始继续我的工作；</p>
@@ -363,9 +379,12 @@
 
 <p>从上文的例子，可以看出，同步调用其实就是我们平时调用函数是一样的，就是等同于将被调函数代码嵌入当前调用的函数代码中运行即可（其实这叫直接调用，同步调用也可以mapping到task上，这里我们不展开讲解，防止大家混乱）</p>
 <p>用代码实际说明一下</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假如我们的被调函数是： </span></span><br><span class="line">Std_ReturnType <span class="title function_">RunnableServer</span><span class="params">(<span class="type">int</span> *param)</span></span><br><span class="line"><span class="comment">//那我们的客户中应该写的调用函数就是：</span></span><br><span class="line"> Std_ReturnType Rte_Call_&lt;Port&gt;_<span class="title function_">RunnableServer</span><span class="params">(<span class="type">int</span> *param)</span> </span><br><span class="line"> <span class="comment">//这个param就是我们希望被调函数操作的变量</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">//假如我们的被调函数是： 
+Std_ReturnType RunnableServer(int *param)
+//那我们的客户中应该写的调用函数就是：
+ Std_ReturnType Rte_Call_&lt;Port&gt;_RunnableServer(int *param) 
+ //这个param就是我们希望被调函数操作的变量
+</code></pre>
 <p>异步调用相当于有两个线程，一个线程运行我们的原函数中的内容，另一个执行被调函数的内容。然后可以过一段时间去读取一下被调函数的返回结果</p>
 <p>而这时，如何知道被调函数是否执行完了呢？有三种方法：</p>
 <ol>
@@ -376,9 +395,9 @@
 <li><p>事件触发，当服务函数运行结束，RTE可以触发原函数，告诉它被调函数运行完了，你可以读取返回值了 读取函数也用代码实际说明一下</p>
 </li>
 </ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行下面的函数后就能将参数返回回来了</span></span><br><span class="line"> Std_ReturnType Rte_Result_&lt;Port&gt;_RunnableServer(<span class="type">int</span> *param)</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">//执行下面的函数后就能将参数返回回来了
+ Std_ReturnType Rte_Result_&lt;Port&gt;_RunnableServer(int *param)
+</code></pre>
 <h3 id="6-RTE对数据一致性的管理"><a href="#6-RTE对数据一致性的管理" class="headerlink" title="6.RTE对数据一致性的管理"></a>6.RTE对数据一致性的管理</h3><p><strong>什么是数据一致性</strong></p>
 <p>数据一致性，就是当多个用户试图同时访问一个数据库，它们的事务同时使用相同的数据时，可能会发生以下四种情况：丢失更新、未确定的相关性、不一致的分析和幻想读。</p>
 <p>说的通俗一点：就是当多个操作同时读写同一个数据的时候，很有可能出bug（实际是由于优先级的问题，可能出现我们的数据被篡改的情况，造成作者不想看到的数据结果）</p>
@@ -386,13 +405,15 @@
 <p>这部分类容之前说过了，就是利用RTE来管理这里的数据，防止bug出现。比如IRead，大家都操作的是数据的备份，不直接操作原数据</p>
 <h4 id="2-、SWC内部变量"><a href="#2-、SWC内部变量" class="headerlink" title="(2)、SWC内部变量"></a>(2)、SWC内部变量</h4><p>这个内部变量就比较神奇了，因为它可以直接在DaVinci中配置，runnable可以直接调用，就类似于一个c文件中定义的全局变量，没有被extern出去。在c文件中定义的函数时可以直接使用的。那么这时就会出问题了，同一个c文件中的函数是可能被放在不同Task上运行的，就可能出现这些函数在同一时刻运行的状况，那么在调用这个全局变量的时候，就可能出bug。那么要如何解决呢？AutoSAR做了以下两种方式：</p>
 <p>EAs(Exclusive Areas,专用区域)：就是下面两句代码，相当于一个关中断，调用变量的语句放在里面，运行时不能有更高级的Task打断被保护的语句</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...... </span><br><span class="line">Rte_Enter_&lt;name&gt;();</span><br><span class="line"> <span class="comment">//这里放置被保护的语句</span></span><br><span class="line"> Rte_Exit_&lt;name&gt;();</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">...... 
+Rte_Enter_&lt;name&gt;();
+ //这里放置被保护的语句
+ Rte_Exit_&lt;name&gt;();
+</code></pre>
 <p>IRVs(Inter-runnable variables,跨函数变量)：还是两句代码，上面的EAs是整段代码段都被保护了，而这里的两句就相当于在改变变量的时候被保护，也就是这两句话执行的时候被保护</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Rte_IrvWrite_&lt;re&gt;_&lt;name&gt;() </span><br><span class="line">Rte_IrvRead_&lt;re&gt;_&lt;name&gt;()</span><br></pre></td></tr></table></figure>
-
-
+<pre><code class="C">Rte_IrvWrite_&lt;re&gt;_&lt;name&gt;() 
+Rte_IrvRead_&lt;re&gt;_&lt;name&gt;()
+</code></pre>
 <h3 id="7-RTE与Interface接口"><a href="#7-RTE与Interface接口" class="headerlink" title="7.RTE与Interface接口"></a>7.RTE与Interface接口</h3><p><strong>AutoSAR接口</strong></p>
 <p>一句话概括： 之前说的S/R和C/S接口就是AutoSAR接口</p>
 <p><strong>标准接口</strong></p>
@@ -1309,7 +1330,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1653565417142"></script>
+<script src="/js/app.js?v=1655121534412"></script>
 
 <script src="https://unpkg.com/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
