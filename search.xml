@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>正则表达式</title>
+      <link href="/2022/06/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2022/06/25/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="正则表达式到底是什么东西？"><a href="#正则表达式到底是什么东西？" class="headerlink" title="正则表达式到底是什么东西？"></a>正则表达式到底是什么东西？</h2><p>在编写处理字符串的程序或网页时，经常会有查找符合某些复杂规则的字符串的需要。正则表达式就是用于描述这些规则的工具。换句话说，正则表达式就是记录文本规则的代码。</p><span id="more"></span><h3 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h3><p>学习正则表达式的最好方法是从例子开始，理解例子之后再自己对例子进行修改，实验。下面给出了不少简单的例子，并对它们作了详细的说明。</p><p>假设你在一篇英文小说里查找hi，你可以使用正则表达式hi。</p><p>这几乎是最简单的正则表达式了，它可以精确匹配这样的字符串：由两个字符组成，前一个字符是h,后一个是i。通常，处理正则表达式的工具会提供一个忽略大小写的选项，如果选中了这个选项，它可以匹配hi,HI,Hi,hI这四种情况中的任意一种。</p><p>不幸的是，很多单词里包含hi这两个连续的字符，比如him,history,high等等。用hi来查找的话，这里边的hi也会被找出来。如果要精确地查找hi这个单词的话，我们应该使用\bhi\b。</p><p>\b是正则表达式规定的一个特殊代码（好吧，某些人叫它元字符，metacharacter），代表着单词的开头或结尾，也就是单词的分界处。虽然通常英文的单词是由空格，标点符号或者换行来分隔的，但是\b并不匹配这些单词分隔字符中的任何一个，它<strong>只匹配一个位置</strong>。</p><p>假如你要找的是hi后面不远处跟着一个Lucy，你应该用 <em>\bhi\b.\ <em>\bLucy\b。</em></em></p><p>0\d\d-\d\d\d\d\d\d\d\d匹配这样的字符串：以0开头，然后是两个数字，然后是一个连字号“-”，最后是8个数字(也就是中国的电话号码。当然，这个例子只能匹配区号为3位的情形)。</p><p>这里的\d是个新的元字符，匹配一位数字(0，或1，或2，或……)。-不是元字符，只匹配它本身——连字符(或者减号，或者中横线，或者随你怎么称呼它)。</p><p>为了避免那么多烦人的重复，我们也可以这样写这个表达式：0\d{2}-\d{8}。这里\d后面的{2}({8})的意思是前面\d必须连续重复匹配2次(8次)。</p><table><thead><tr><th>符号</th><th>解释</th><th>示例</th><th>说明</th></tr></thead><tbody><tr><td>.</td><td>匹配任意字符</td><td>b.t</td><td>可以匹配bat / but / b#t / b1t等</td></tr><tr><td>\w</td><td>匹配字母/数字/下划线</td><td>b\wt</td><td>可以匹配bat / b1t / b_t等 但不能匹配b#t</td></tr><tr><td>\s</td><td>匹配空白字符（包括\r、\n、\t等）</td><td>love\syou</td><td>可以匹配love you</td></tr><tr><td>\d</td><td>匹配数字</td><td>\d\d</td><td>可以匹配01 / 23 / 99等</td></tr><tr><td>\b</td><td>匹配单词的边界</td><td>\bThe\b</td><td></td></tr><tr><td>^</td><td>匹配字符串的开始</td><td>^The</td><td>可以匹配The开头的字符串</td></tr><tr><td>$</td><td>匹配字符串的结束</td><td>.exe$</td><td>可以匹配.exe结尾的字符串</td></tr><tr><td>\W</td><td>匹配非字母/数字/下划线</td><td>b\Wt</td><td>可以匹配b#t / b@t等 但不能匹配but / b1t / b_t等</td></tr><tr><td>\S</td><td>匹配非空白字符</td><td>love\Syou</td><td>可以匹配love#you等 但不能匹配love you</td></tr><tr><td>\D</td><td>匹配非数字</td><td>\d\D</td><td>可以匹配9a / 3# / 0F等</td></tr><tr><td>\B</td><td>匹配非单词边界</td><td>\Bio\B</td><td></td></tr><tr><td>[]</td><td>匹配来自字符集的任意单一字符</td><td>[aeiou]</td><td>可以匹配任一元音字母字符</td></tr><tr><td>[^]</td><td>匹配不在字符集中的任意单一字符</td><td>[^aeiou]</td><td>可以匹配任一非元音字母字符</td></tr><tr><td></td><td>匹配0次或多次</td><td>\w</td><td></td></tr><tr><td>+</td><td>匹配1次或多次</td><td>\w+</td><td></td></tr><tr><td>?</td><td>匹配0次或1次</td><td>\w?</td><td></td></tr><tr><td>{N}</td><td>匹配N次</td><td>\w{3}</td><td></td></tr><tr><td>{M,}</td><td>匹配至少M次</td><td>\w{3,}</td><td></td></tr><tr><td>{M,N}</td><td>匹配至少M次至多N次</td><td>\w{3,6}</td><td></td></tr><tr><td>|</td><td>分支</td><td>foo|bar</td><td>可以匹配foo或者bar</td></tr><tr><td>(?#)</td><td>注释</td><td></td><td></td></tr><tr><td>(exp)</td><td>匹配exp并捕获到自动命名的组中</td><td></td><td></td></tr><tr><td>(?&lt;name&gt;exp)</td><td>匹配exp并捕获到名为name的组中</td><td></td><td></td></tr><tr><td>(?:exp)</td><td>匹配exp但是不捕获匹配的文本</td><td></td><td></td></tr><tr><td>(?=exp)</td><td>匹配exp前面的位置</td><td>\b\w+(?=ing)</td><td>可以匹配I’m dancing中的danc</td></tr><tr><td>(?&lt;=exp)</td><td>匹配exp后面的位置</td><td>(?&lt;=\bdanc)\w+\b</td><td>可以匹配I love dancing and reading中的第一个ing</td></tr><tr><td>(?!exp)</td><td>匹配后面不是exp的位置</td><td></td><td></td></tr><tr><td>(?&lt;!exp)</td><td>匹配前面不是exp的位置</td><td></td><td></td></tr><tr><td>?</td><td>重复任意次，但尽可能少重复</td><td>a.<em>b a.</em>?b</td><td>将正则表达式应用于aabab，前者会匹配整个字符串aabab，后者会匹配aab和ab两个字符串</td></tr><tr><td>+?</td><td>重复1次或多次，但尽可能少重复</td><td></td><td></td></tr><tr><td>??</td><td>重复0次或1次，但尽可能少重复</td><td></td><td></td></tr><tr><td>{M,N}?</td><td>重复M到N次，但尽可能少重复</td><td></td><td></td></tr><tr><td>{M,}?</td><td>重复M次以上，但尽可能少重复</td><td></td><td></td></tr></tbody></table><h3 id="Python对正则表达式的支持"><a href="#Python对正则表达式的支持" class="headerlink" title="Python对正则表达式的支持"></a>Python对正则表达式的支持</h3><p>Python提供了re模块来支持正则表达式相关操作，下面是re模块中的核心函数。</p><table><thead><tr><th>函数</th><th>说明</th></tr></thead><tbody><tr><td>compile(pattern, flags=0)</td><td>编译正则表达式返回正则表达式对象</td></tr><tr><td>match(pattern, string, flags=0)</td><td>用正则表达式匹配字符串 成功返回匹配对象 否则返回None</td></tr><tr><td>search(pattern, string, flags=0)</td><td>搜索字符串中第一次出现正则表达式的模式 成功返回匹配对象 否则返回None</td></tr><tr><td>split(pattern, string, maxsplit=0, flags=0)</td><td>用正则表达式指定的模式分隔符拆分字符串 返回列表</td></tr><tr><td>sub(pattern, repl, string, count=0, flags=0)</td><td>用指定的字符串替换原字符串中与正则表达式匹配的模式 可以用count指定替换的次数</td></tr><tr><td>fullmatch(pattern, string, flags=0)</td><td>match函数的完全匹配（从字符串开头到结尾）版本</td></tr><tr><td>findall(pattern, string, flags=0)</td><td>查找字符串所有与正则表达式匹配的模式 返回字符串的列表</td></tr><tr><td>finditer(pattern, string, flags=0)</td><td>查找字符串所有与正则表达式匹配的模式 返回一个迭代器</td></tr><tr><td>purge()</td><td>清除隐式编译的正则表达式的缓存</td></tr><tr><td>re.I / re.IGNORECASE</td><td>忽略大小写匹配标记</td></tr><tr><td>re.M / re.MULTILINE</td><td>多行匹配标记</td></tr></tbody></table><p>例如过滤：’UUID=”Obfa7a301181140c29ccf5996XObfa7a301181140c29ccf599500”&gt;</p><pre><code class="c">正则表达式；UUID=&quot;(. *)&quot;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 基础配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 2022 </tag>
+            
+            <tag> 开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022_6_近况闲谈</title>
+      <link href="/2022/06/17/2022-6-%E8%BF%91%E5%86%B5%E9%97%B2%E8%B0%88/"/>
+      <url>/2022/06/17/2022-6-%E8%BF%91%E5%86%B5%E9%97%B2%E8%B0%88/</url>
+      
+        <content type="html"><![CDATA[<p>呼，总算从六月出来了。这个月的主基调是回去拿毕业证和学位证</p><span id="more"></span><p>首先是端午节三天，都是待在宿舍里面不晓得干啥，然后就是说要准备六级考试，由于拖延症一直没准备，到考场看到那个作文，有些像当初考研时候的作文类型，有些许后悔自己为什么没好好准备！之后就是无休止的饭局了，吃了挺多地方的，而且没修整过。 在回去学校的日子里，主要是整理宿舍和写思想汇报吧，并且拿了那两张纸。</p><p> 六月二十到二十五的日子可太难顶了，前三天要自己摸索小米填写的那个矩阵表，后两天得自己搞懂E2E检测规则，后两天加班到晚上十二点多，甚至有点怀疑继续工作的意义是什么了，但是想了想自己什么都不会，去读研之后也痛苦，人生啊………</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 生活足迹 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 2022 </tag>
+            
+            <tag> 认真生活 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>python进阶</title>
       <link href="/2022/06/13/python%E8%BF%9B%E9%98%B6/"/>
       <url>/2022/06/13/python%E8%BF%9B%E9%98%B6/</url>
